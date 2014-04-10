@@ -6,13 +6,5 @@ Project Malachite, named after the beautiful little kingfisher. From [wikipedia]
 
 Project Malachite is the next incarnation of the recently deceased Project Raven.
 
----
+Update (2014-04-10): What started as a Ruby on Rails project just died an early death. The project will be converted to use Node.js on the back-end and Ember.js on the front-end.
 
-## Notes
-
-These things came in handy:
-
-* [Rails Tutorial](http://ruby.railstutorial.org/ruby-on-rails-tutorial-book)
-* [How to Setup a Production Server for Rails 4](http://robmclarty.com/blog/how-to-setup-a-production-server-for-rails-4)
-* [How to Deploy a Rails 4 App](http://robmclarty.com/blog/how-to-deploy-a-rails-4-app-with-git-and-capistrano)
-* [Why Ruby?](http://anders.janmyr.com/2010/09/why-ruby.html)
