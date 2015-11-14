@@ -1,0 +1,10 @@
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+
+
+.btn-group-vertical > .btn, .btn-group > .btn {
+    background-color: #F8F8F8;
+    color: #777777;
+    margin-top: 8px;
+}

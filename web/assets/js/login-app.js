@@ -26,13 +26,8 @@ loginApp.run(function($rootScope, $http, $cookies, $window) {
         .success(function (data) {
             $rootScope.config = data;
 
-            console.log('config: ' + JSON.stringify(data));
-
             // If the visitor is already logged in (has a cookie), take him to the main site.
             var biscuit = $cookies.getObject('bookmarklyLogin');
-
-            console.log('biscuit: ' + JSON.stringify(biscuit));
-
             if (biscuit) {
                 $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
             }

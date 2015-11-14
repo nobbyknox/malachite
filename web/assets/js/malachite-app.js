@@ -2,7 +2,8 @@
 
 var malApp = angular.module('malApp', [
     'ngRoute',
-    'ngCookies'
+    'ngCookies',
+    'ui.bootstrap'
 ]);
 
 malApp.config(function ($routeProvider, $httpProvider) {
@@ -45,62 +46,51 @@ malApp.run(function ($rootScope, $http, $location, $window, $cookies) {
         .success(function (data) {
             $rootScope.config = data;
             console.log('config: ' + JSON.stringify(data));
+
+            if ($rootScope.sessionUser) {
+                $http.get($rootScope.config.baseUrl + 'groups?token=' + $rootScope.sessionUser.token)
+                    .success(function (data) {
+                        $rootScope.groups = data;
+                    });
+            }
         });
 
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
-
         if (!$rootScope.sessionUser) {
             $location.path('/login');
-
-            setTimeout(function() {
-                $window.location = $rootScope.config.baseUrl + $rootScope.config.loginAppPath;
-            }, 6000);
-
         }
     });
 
-    setTimeout(function() {
-        $http.get($rootScope.config.baseUrl + 'groups?token=' + $rootScope.sessionUser.token)
-            .success(function (data) {
-                $rootScope.groups = data;
-
-                console.log('groups: ' + JSON.stringify(data));
-            });
-    }, 1000);
-
     $rootScope.selectGroup = function (id) {
         console.log('Selected group: ' + id);
-        $rootScope.selectedGroup = id;
     };
 
 });
 
 malApp.controller('IndexController', function ($rootScope) {
-    // Highlight the corresponding menu and tab
-    $rootScope.selectedMenu = 'root';
-    $rootScope.selectedTab = 'root';
 });
 
 malApp.controller('TestController', function($rootScope) {
-    console.log('In TestController');
 });
 
-malApp.controller('LoginController', function ($rootScope) {
-    // Highlight the corresponding menu and tab
-    $rootScope.selectedMenu = 'root';
-    $rootScope.selectedTab = 'root';
+malApp.controller('LoginController', function ($rootScope, $window) {
+    if ($rootScope.config.loginRedirectDelay > 0) {
+        setTimeout(function() {
+            $window.location = $rootScope.config.baseUrl + $rootScope.config.loginAppPath;
+        }, $rootScope.config.loginRedirectDelay);
+    }
 });
 
 malApp.controller('LogoutController', function ($rootScope, $cookies, $window) {
-    // Highlight the corresponding menu and tab
-    $rootScope.selectedMenu = 'root';
-    $rootScope.selectedTab = 'root';
 
     $cookies.remove('bookmarklyLogin');
     $rootScope.sessionUser = null;
 
-    setTimeout(function () {
-        $window.location = $rootScope.config.baseUrl + $rootScope.config.loginAppPath;
-    }, 4000);
+    if ($rootScope.config.logoutRedirectDelay > 0) {
+        setTimeout(function () {
+            $window.location = $rootScope.config.baseUrl + $rootScope.config.loginAppPath;
+        }, $rootScope.config.logoutRedirectDelay);
+    }
+
 });
