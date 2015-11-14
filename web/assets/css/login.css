@@ -1,17 +1,21 @@
 body {
+    background: url('../images/wordy-web.jpg') no-repeat center center fixed;
+    /*background-color: #eee;*/
+    background-size: cover;
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: #eee;
 }
 
 .form-signin {
+    background-color: rgba(216,219,215,0.65);
     max-width: 330px;
     padding: 15px;
-    margin: 0 auto;
+    margin: 50px auto;
 }
 
 .form-signin h3 {
     font-size: 15px;
+    margin-top: 0;
     text-align: center;
 }
 
@@ -22,6 +26,7 @@ body {
 
 .form-signin-heading {
     font-size: 20px;
+    margin-top: 0;
     text-align: center;
 }
 
