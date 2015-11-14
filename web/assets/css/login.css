@@ -9,10 +9,22 @@ body {
     padding: 15px;
     margin: 0 auto;
 }
+
+.form-signin h3 {
+    font-size: 15px;
+    text-align: center;
+}
+
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
     margin-bottom: 10px;
 }
+
+.form-signin-heading {
+    font-size: 20px;
+    text-align: center;
+}
+
 .form-signin .checkbox {
     font-weight: normal;
 }

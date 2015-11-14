@@ -6,7 +6,7 @@ var loginApp = angular.module('loginApp', [
 ]);
 
 loginApp.run(function($rootScope) {
-    $rootScope.pageTitle = 'Login to the VBX Management Interface';
+    $rootScope.pageTitle = 'Bookmarkly - please sign in';
 });
 
 loginApp.config(function($routeProvider) {
@@ -25,10 +25,10 @@ loginApp.config(function($routeProvider) {
 
 loginApp.controller('LoginController', function($scope, $cookies, $window) {
 
-    var biscuit = $cookies.getObject('wildhammerLogin');
+    var biscuit = $cookies.getObject('bookmarklyLogin');
 
     if (biscuit) {
-        $window.location = 'http://localhost:3001/';
+        $window.location = 'http://localhost:3003/';
         return;
     }
 
@@ -40,11 +40,11 @@ loginApp.controller('LoginController', function($scope, $cookies, $window) {
         };
 
         console.log('Login cookie: ' + JSON.stringify(cookiePayload));
-        $cookies.putObject('wildhammerLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
+        $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
 
         console.log('path: ' + $window.location);
 
-        $window.location = 'http://localhost:3001/';
+        $window.location = 'http://localhost:3003/';
 
     };
 });

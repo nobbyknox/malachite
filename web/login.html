@@ -13,17 +13,16 @@
     <!-- Custom login styles -->
     <link href="assets/css/login.css" rel="stylesheet">
 
-    <!-- Wildhammer specific styles -->
-    <link href="assets/css/wildhammer.css" rel="stylesheet">
 </head>
 
 <body>
 
     <div class="container" ng-controller="LoginController">
         <form class="form-signin">
-            <h2 class="form-signin-heading">Please sign in</h2>
+            <h2 class="form-signin-heading">Welcome to Bookmarkly</h2>
+            <h3>Please sign in</h3>
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" ng-model="username" class="form-control" placeholder="Email address" required autofocus>
+            <input type="text" id="inputEmail" ng-model="username" class="form-control" placeholder="Username or email address" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" ng-model="password" class="form-control" placeholder="Password" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login()">Sign in</button>
@@ -39,7 +38,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-sanitize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-cookies.min.js"></script>
-<script src="assets/js/wildhammer-login-app.js"></script>
+<script src="assets/js/login-app.js"></script>
 
 </body>
 </html>
