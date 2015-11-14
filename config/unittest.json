@@ -1,0 +1,10 @@
+{
+    "host": "http://localhost",
+    "port": 3003,
+
+    "loggerOptions": {
+        "name": "malachite",
+        "level": "error",
+        "src": true
+    }
+}
