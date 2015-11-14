@@ -5,16 +5,11 @@ var loginApp = angular.module('loginApp', [
     'ngCookies'
 ]);
 
-loginApp.run(function($rootScope) {
-    $rootScope.pageTitle = 'Bookmarkly - please sign in';
-});
-
 loginApp.config(function($routeProvider) {
 
     // Define the routes
     $routeProvider
         .when('/', {
-            templateUrl: 'partials/index.html',
             controller: 'LoginController'
             })
         .otherwise({
@@ -23,28 +18,52 @@ loginApp.config(function($routeProvider) {
 
 });
 
-loginApp.controller('LoginController', function($scope, $cookies, $window) {
+loginApp.run(function($rootScope, $http, $cookies, $window) {
 
-    var biscuit = $cookies.getObject('bookmarklyLogin');
+    $rootScope.pageTitle = 'Bookmarkly - please sign in';
 
-    if (biscuit) {
-        $window.location = 'http://localhost:3003/';
-        return;
-    }
+    $http.get('/config')
+        .success(function (data) {
+            $rootScope.config = data;
+
+            console.log('config: ' + JSON.stringify(data));
+
+            // If the visitor is already logged in (has a cookie), take him to the main site.
+            var biscuit = $cookies.getObject('bookmarklyLogin');
+
+            console.log('biscuit: ' + JSON.stringify(biscuit));
+
+            if (biscuit) {
+                $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
+            }
+        });
+
+});
+
+loginApp.controller('LoginController', function($scope, $rootScope, $cookies, $window) {
 
     $scope.login = function() {
 
         var cookiePayload = {
             username: $scope.username,
-            token: "abc123-def456-ghi789-jkl012"
+            token: guid()
         };
 
-        console.log('Login cookie: ' + JSON.stringify(cookiePayload));
         $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
-
-        console.log('path: ' + $window.location);
-
-        $window.location = 'http://localhost:3003/';
+        $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
 
     };
 });
+
+
+// -----------------------------------------------------------------------------
+
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}

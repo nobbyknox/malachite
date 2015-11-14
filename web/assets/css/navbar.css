@@ -1,3 +1,4 @@
+/*
 body {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -5,4 +6,24 @@ body {
 
 .navbar {
     margin-bottom: 20px;
+}
+*/
+
+/*.header .header-nav ul#nav-account ul.dropdown-menu,*/
+/*.header .header-nav ul#nav-library ul.dropdown-menu {*/
+    /*position: relative;*/
+    /*z-index: 10000;*/
+/*}*/
+
+/*.navbar-wrapper {*/
+    /*z-index: 11;*/
+/*}*/
+
+
+.dropdown, .dropdown-menu {
+    z-index:2;
+}
+.navbar {
+    position: static;
+    z-index: 1;
 }
