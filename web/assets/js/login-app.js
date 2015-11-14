@@ -35,17 +35,26 @@ loginApp.run(function($rootScope, $http, $cookies, $window) {
 
 });
 
-loginApp.controller('LoginController', function($scope, $rootScope, $cookies, $window) {
+loginApp.controller('LoginController', function($scope, $rootScope, $http, $cookies, $window) {
 
     $scope.login = function() {
 
-        var cookiePayload = {
-            username: $scope.username,
-            token: guid()
-        };
 
-        $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
-        $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
+        $http.post($rootScope.config.baseUrl + 'authenticate', {'username': $scope.username, 'password': $scope.password})
+            .success(function (data) {
+
+                if (data && data.token) {
+                    var cookiePayload = {
+                        username: $scope.username,
+                        token: data.token
+                    };
+                    $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
+                    $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
+                } else {
+                    console.log('Incorrect! Try again');
+                }
+            });
+
 
     };
 });
@@ -53,12 +62,12 @@ loginApp.controller('LoginController', function($scope, $rootScope, $cookies, $w
 
 // -----------------------------------------------------------------------------
 
-function guid() {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-}
+//function guid() {
+//    function s4() {
+//        return Math.floor((1 + Math.random()) * 0x10000)
+//            .toString(16)
+//            .substring(1);
+//    }
+//    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+//        s4() + '-' + s4() + s4() + s4();
+//}
