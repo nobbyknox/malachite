@@ -50,7 +50,7 @@
                         </button>
                         <ul class="uib-dropdown-menu" role="menu" aria-labelledby="group-dropdown-button">
                             <!--<li class="divider"></li>-->
-                            <li ng-class="{'active':selectedGroup === grp.id}" ng-repeat="grp in groups | orderBy: ['name']" ng-click="selectGroup(grp.id)" role="menuitem"><a href="#/test">{{ grp.name }}</a></li>
+                            <li ng-class="{'active':selectedGroup === grp.id}" ng-repeat="grp in groups | orderBy: ['name']" ng-click="selectGroup(grp.id)" role="menuitem"><a href="#/bookmarks/group/{{ grp.id }}">{{ grp.name }}</a></li>
                         </ul>
                     </div>
                 </li>

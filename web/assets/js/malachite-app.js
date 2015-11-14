@@ -26,6 +26,10 @@ malApp.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'partials/test.html',
             controller: 'TestController'
         })
+        .when('/bookmarks/group/:groupId', {
+            templateUrl: 'partials/bookmarks.html',
+            controller: 'BookmarksOfGroupController'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -92,5 +96,17 @@ malApp.controller('LogoutController', function ($rootScope, $cookies, $window) {
             $window.location = $rootScope.config.baseUrl + $rootScope.config.loginAppPath;
         }, $rootScope.config.logoutRedirectDelay);
     }
+
+});
+
+malApp.controller('BookmarksOfGroupController', function ($routeParams, $http, $rootScope) {
+
+    console.log("group id " + $routeParams.groupId);
+    console.log('user session: ' + JSON.stringify($rootScope.sessionUser));
+
+    $http.get($rootScope.config.baseUrl + 'bookmarks/group/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
+        .success(function (data) {
+            console.log('bookmarks: ' + JSON.stringify(data));
+        });
 
 });
