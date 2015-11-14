@@ -27,7 +27,7 @@ malApp.config(function($routeProvider, $httpProvider) {
 
 });
 
-malApp.run(function($rootScope, $location, $window, $cookies) {
+malApp.run(function($rootScope, $http, $location, $window, $cookies) {
 
     $rootScope.pageTitle = 'Project Malachite';
 
@@ -48,6 +48,26 @@ malApp.run(function($rootScope, $location, $window, $cookies) {
     //
     //     }
     // });
+
+    $rootScope.sessionUser = {
+        username: 'nobbyknox@gmail.com',
+        userId: 2,
+        token: 'abc123'
+    };
+
+    setTimeout(function() {
+        $http.get('http://localhost:3003/groups?token=' + $rootScope.sessionUser.token)
+            .success(function (data) {
+                $rootScope.groups = data;
+
+                console.log('groups: ' + JSON.stringify(data));
+            });
+    }, 1000);
+
+    $rootScope.selectGroup = function(id) {
+        console.log('Selected group: ' + id);
+        $rootScope.selectedGroup = id;
+    };
 
 });
 

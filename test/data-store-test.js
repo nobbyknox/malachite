@@ -2,16 +2,13 @@
 
 var config = require('../config/' + (process.env.MALACHITE_ENV || 'development') + '.json');
 
-var assert = require('assert');
-var path = require('path');
-
 var dataStore = require('../lib/dao/data-store.js');
 var models = require('../lib/dao/models.js');
-var bookshelf = require('../lib/dao/bookshelf.js');
 
-var Q = require('q');
 var moment = require('moment');
-var log = require('bunyan').createLogger(config.loggerOptions);
+
+var assert = require('assert');
+var path = require('path');
 
 describe(path.basename(__filename), function() {
 

@@ -47,6 +47,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Groups <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li ng-class="{'active':selectedGroup === grp.id}" ng-repeat="grp in groups | orderBy: ['name']" ng-click="selectGroup(grp.id)"><a href="#">{{ grp.name }}</a></li>
+<!--
                             <li><a href="#">Favourites</a></li>
                             <li><a href="#">ECN</a></li>
                             <li class="active"><a href="#">Toolbox</a></li>
@@ -54,6 +56,7 @@
                             <li><a href="#">Separated link</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">One more separated link</a></li>
+-->
                         </ul>
                     </li>
                 </ul>
