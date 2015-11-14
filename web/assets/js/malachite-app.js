@@ -99,7 +99,7 @@ malApp.controller('LogoutController', function ($rootScope, $cookies, $window) {
 
 });
 
-malApp.controller('BookmarksOfGroupController', function ($routeParams, $http, $rootScope) {
+malApp.controller('BookmarksOfGroupController', function ($scope, $rootScope, $routeParams, $http) {
 
     console.log("group id " + $routeParams.groupId);
     console.log('user session: ' + JSON.stringify($rootScope.sessionUser));
@@ -107,6 +107,7 @@ malApp.controller('BookmarksOfGroupController', function ($routeParams, $http, $
     $http.get($rootScope.config.baseUrl + 'bookmarks/group/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
         .success(function (data) {
             console.log('bookmarks: ' + JSON.stringify(data));
+            $scope.bookmarks = data;
         });
 
 });

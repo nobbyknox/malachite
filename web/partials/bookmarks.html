@@ -1,9 +1,14 @@
-<div class="jumbotron" style="z-index: 1">
-
-    <h2>Test</h2>
-
-    <p>
-        This is a test.
-    </p>
-
-</div>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="bkm in bookmarks">
+            <td>{{ bkm.id }}</td>
+            <td>{{ bkm.title }}</td>
+        </tr>
+    </tbody>
+</table>
