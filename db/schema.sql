@@ -26,6 +26,7 @@ CREATE TABLE "users" (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	`email`	TEXT NOT NULL UNIQUE,
 	`screenName`	TEXT NOT NULL UNIQUE,
+	`password`      TEXT,
 	`dateCreated`	TEXT
 );
 CREATE TABLE "tags" (
