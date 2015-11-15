@@ -26,6 +26,10 @@ malApp.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'partials/test.html',
             controller: 'TestController'
         })
+        .when('/bookmarks/:id', {
+            templateUrl: 'partials/bookmark.html',
+            controller: 'BookmarkController'
+        })
         .when('/bookmarks/group/:groupId', {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksOfGroupController'
@@ -48,8 +52,8 @@ malApp.run(function ($rootScope, $http, $location, $window, $cookies) {
 
     $http.get('/config')
         .success(function (data) {
+
             $rootScope.config = data;
-            console.log('config: ' + JSON.stringify(data));
 
             if ($rootScope.sessionUser) {
                 $http.get($rootScope.config.baseUrl + 'groups?token=' + $rootScope.sessionUser.token)
@@ -61,22 +65,19 @@ malApp.run(function ($rootScope, $http, $location, $window, $cookies) {
 
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
+
+        $rootScope.previousPage = current;
+
         if (!$rootScope.sessionUser) {
             $location.path('/login');
         }
     });
 
-    $rootScope.selectGroup = function (id) {
-        console.log('Selected group: ' + id);
-    };
-
 });
 
-malApp.controller('IndexController', function ($rootScope) {
-});
+malApp.controller('IndexController', function ($rootScope) { });
 
-malApp.controller('TestController', function ($rootScope) {
-});
+malApp.controller('TestController', function ($rootScope) { });
 
 malApp.controller('LoginController', function ($rootScope, $window) {
     if ($rootScope.config.loginRedirectDelay > 0) {
@@ -99,10 +100,47 @@ malApp.controller('LogoutController', function ($rootScope, $cookies, $window) {
 
 });
 
-malApp.controller('BookmarksOfGroupController', function ($scope, $rootScope, $routeParams, $http) {
+malApp.controller('BookmarkController', function ($scope, $rootScope, $routeParams, $http, $window) {
 
-    //console.log("group id " + $routeParams.groupId);
-    //console.log('user session: ' + JSON.stringify($rootScope.sessionUser));
+    if ($routeParams.id === 'new') {
+        $scope.bookmark = {};
+    } else {
+        $http.get($rootScope.config.baseUrl + 'bookmarks/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
+            .success(function (data) {
+                $scope.bookmark = data[0] || data;
+            });
+    }
+
+    $scope.save = function() {
+
+        if ($routeParams.id === 'new') {
+
+            $scope.bookmark.userId = 2;
+            $scope.bookmark.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');
+
+            $http.post($rootScope.config.baseUrl + 'bookmarks?token=' + $rootScope.sessionUser.token, $scope.bookmark)
+                .success(function() {
+                    if ($rootScope.previousPage) {
+                        $window.location = $rootScope.previousPage;
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
+        } else {
+            $http.put($rootScope.config.baseUrl + 'bookmarks?token=' + $rootScope.sessionUser.token, $scope.bookmark)
+                .success(function() {
+                    if ($rootScope.previousPage) {
+                        $window.location = $rootScope.previousPage;
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
+        }
+    }
+
+});
+
+malApp.controller('BookmarksOfGroupController', function ($scope, $rootScope, $routeParams, $http) {
 
     $http.get($rootScope.config.baseUrl + 'bookmarks/group/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
         .success(function (data) {
@@ -111,7 +149,7 @@ malApp.controller('BookmarksOfGroupController', function ($scope, $rootScope, $r
 
             $http.get($rootScope.config.baseUrl + 'groups/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
                 .success(function(data) {
-                    console.log(data);
+                    //console.log(data);
                     $scope.group = data[0] || data;
                 });
         });

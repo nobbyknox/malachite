@@ -5,12 +5,14 @@
         <tr>
             <td>ID</td>
             <td>Title</td>
+            <td>Rating</td>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="bkm in bookmarks">
             <td>{{ bkm.id }}</td>
-            <td>{{ bkm.title }}</td>
+            <td><a href="#/bookmarks/{{ bkm.id }}">{{ bkm.title }}</a></td>
+            <td>{{ bkm.rating }}</td>
         </tr>
     </tbody>
 </table>
