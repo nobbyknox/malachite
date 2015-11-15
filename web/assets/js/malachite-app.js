@@ -116,7 +116,7 @@ malApp.controller('BookmarkController', function ($scope, $rootScope, $routePara
         if ($routeParams.id === 'new') {
 
             $scope.bookmark.userId = $rootScope.sessionUser.userId;
-            $scope.bookmark.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');
+            $scope.bookmark.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');  // TODO: Get format from config
 
             $http.post($rootScope.config.baseUrl + 'bookmarks?token=' + $rootScope.sessionUser.token, $scope.bookmark)
                 .success(function() {

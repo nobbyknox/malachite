@@ -6,6 +6,13 @@ CREATE TABLE "users" (
 	`password`      TEXT,
 	`dateCreated`	TEXT
 );
+CREATE TABLE "token_cache" (
+    `id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    `token` TEXT NOT NULL,
+    `userId`    INTEGER NOT NULL UNIQUE,
+    `dateCreated` TEXT,
+    `dateUpdated` TEXT
+);
 CREATE TABLE "bookmarks" (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	`title`	TEXT NOT NULL,
