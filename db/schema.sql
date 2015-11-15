@@ -1,9 +1,9 @@
 BEGIN TRANSACTION;
-CREATE TABLE "bookmarkgroups" (
+CREATE TABLE "users" (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	`userId`	INTEGER NOT NULL,
-	`bookmarkId`	INTEGER NOT NULL,
-	`groupId`	INTEGER NOT NULL,
+	`email`	TEXT NOT NULL UNIQUE,
+	`screenName`	TEXT NOT NULL UNIQUE,
+	`password`      TEXT,
 	`dateCreated`	TEXT
 );
 CREATE TABLE "bookmarks" (
@@ -22,11 +22,10 @@ CREATE TABLE "groups" (
 	`parentGroupId`	INTEGER,
 	`dateCreated`	TEXT
 );
-CREATE TABLE "users" (
+CREATE TABLE "bookmarks_groups" (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	`email`	TEXT NOT NULL UNIQUE,
-	`screenName`	TEXT NOT NULL UNIQUE,
-	`password`      TEXT,
+	`bookmarkId`	INTEGER NOT NULL,
+	`groupId`	INTEGER NOT NULL,
 	`dateCreated`	TEXT
 );
 CREATE TABLE "tags" (
@@ -35,9 +34,8 @@ CREATE TABLE "tags" (
 	`dateCreated`	TEXT,
 	`userId`	INTEGER NOT NULL
 );
-CREATE TABLE "bookmarktags" (
+CREATE TABLE "bookmarks_tags" (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	`userId`	INTEGER NOT NULL,
 	`bookmarkId`	INTEGER NOT NULL,
 	`tagId`	INTEGER NOT NULL,
 	`dateCreated`	TEXT
