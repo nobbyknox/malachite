@@ -9,7 +9,7 @@
     },
 
     "webOptions": {
-        "baseUrl": "http://192.168.10.102:3003/",
+        "baseUrl": "http://localhost:3003/",
         "mainAppPath": "",
         "loginAppPath": "login.html",
         "loginRedirectDelay": 7000,
