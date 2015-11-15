@@ -75,12 +75,12 @@ malApp.run(function ($rootScope, $http, $location, $window, $cookies) {
 malApp.controller('IndexController', function ($rootScope) {
 });
 
-malApp.controller('TestController', function($rootScope) {
+malApp.controller('TestController', function ($rootScope) {
 });
 
 malApp.controller('LoginController', function ($rootScope, $window) {
     if ($rootScope.config.loginRedirectDelay > 0) {
-        setTimeout(function() {
+        setTimeout(function () {
             $window.location = $rootScope.config.baseUrl + $rootScope.config.loginAppPath;
         }, $rootScope.config.loginRedirectDelay);
     }
@@ -101,13 +101,19 @@ malApp.controller('LogoutController', function ($rootScope, $cookies, $window) {
 
 malApp.controller('BookmarksOfGroupController', function ($scope, $rootScope, $routeParams, $http) {
 
-    console.log("group id " + $routeParams.groupId);
-    console.log('user session: ' + JSON.stringify($rootScope.sessionUser));
+    //console.log("group id " + $routeParams.groupId);
+    //console.log('user session: ' + JSON.stringify($rootScope.sessionUser));
 
     $http.get($rootScope.config.baseUrl + 'bookmarks/group/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
         .success(function (data) {
-            console.log('bookmarks: ' + JSON.stringify(data));
+            //console.log('bookmarks: ' + JSON.stringify(data));
             $scope.bookmarks = data;
+
+            $http.get($rootScope.config.baseUrl + 'groups/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
+                .success(function(data) {
+                    console.log(data);
+                    $scope.group = data[0] || data;
+                });
         });
 
 });
