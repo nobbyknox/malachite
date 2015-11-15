@@ -45,6 +45,7 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
 
                 if (data && data.token) {
                     var cookiePayload = {
+                        userId: data.id,
                         username: $scope.username,
                         token: data.token
                     };
