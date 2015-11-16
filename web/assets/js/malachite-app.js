@@ -42,6 +42,14 @@ malApp.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'partials/group.html',
             controller: 'GroupController'
         })
+        .when('/tags', {
+            templateUrl: 'partials/tags.html',
+            controller: 'TagsController'
+        })
+        .when('/tags/:id', {
+            templateUrl: 'partials/tag.html',
+            controller: 'TagController'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -201,6 +209,55 @@ malApp.controller('GroupController', function ($scope, $rootScope, $routeParams,
                 });
         } else {
             $http.put($rootScope.config.baseUrl + 'groups?token=' + $rootScope.sessionUser.token, $scope.group)
+                .success(function() {
+                    if ($rootScope.previousPage) {
+                        $window.location = $rootScope.previousPage;
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
+        }
+    }
+
+});
+
+malApp.controller('TagsController', function ($scope, $rootScope, $routeParams, $http) {
+
+    $http.get($rootScope.config.baseUrl + 'tags?token=' + $rootScope.sessionUser.token)
+        .success(function (data) {
+            $scope.tags = data;
+        });
+
+});
+
+malApp.controller('TagController', function ($scope, $rootScope, $routeParams, $http, $window) {
+
+    if ($routeParams.id === 'new') {
+        $scope.tag = {};
+    } else {
+        $http.get($rootScope.config.baseUrl + 'tags/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
+            .success(function (data) {
+                $scope.tag = data[0] || data;
+            });
+    }
+
+    $scope.save = function() {
+
+        if ($routeParams.id === 'new') {
+
+            $scope.tag.userId = $rootScope.sessionUser.userId;
+            $scope.tag.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');  // TODO: Get format from config
+
+            $http.post($rootScope.config.baseUrl + 'tags?token=' + $rootScope.sessionUser.token, $scope.tag)
+                .success(function() {
+                    if ($rootScope.previousPage) {
+                        $window.location = $rootScope.previousPage;
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
+        } else {
+            $http.put($rootScope.config.baseUrl + 'tags?token=' + $rootScope.sessionUser.token, $scope.tag)
                 .success(function() {
                     if ($rootScope.previousPage) {
                         $window.location = $rootScope.previousPage;
