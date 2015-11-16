@@ -34,6 +34,14 @@ malApp.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksOfGroupController'
         })
+        .when('/groups', {
+            templateUrl: 'partials/groups.html',
+            controller: 'GroupsController'
+        })
+        .when('/groups/:id', {
+            templateUrl: 'partials/group.html',
+            controller: 'GroupController'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -153,5 +161,54 @@ malApp.controller('BookmarksOfGroupController', function ($scope, $rootScope, $r
                     $scope.group = data[0] || data;
                 });
         });
+
+});
+
+malApp.controller('GroupsController', function ($scope, $rootScope, $routeParams, $http) {
+
+    $http.get($rootScope.config.baseUrl + 'groups?token=' + $rootScope.sessionUser.token)
+        .success(function (data) {
+            $scope.groups = data;
+        });
+
+});
+
+malApp.controller('GroupController', function ($scope, $rootScope, $routeParams, $http, $window) {
+
+    if ($routeParams.id === 'new') {
+        $scope.group = {};
+    } else {
+        $http.get($rootScope.config.baseUrl + 'groups/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
+            .success(function (data) {
+                $scope.group = data[0] || data;
+            });
+    }
+
+    $scope.save = function() {
+
+        if ($routeParams.id === 'new') {
+
+            $scope.group.userId = $rootScope.sessionUser.userId;
+            $scope.group.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');  // TODO: Get format from config
+
+            $http.post($rootScope.config.baseUrl + 'groups?token=' + $rootScope.sessionUser.token, $scope.group)
+                .success(function() {
+                    if ($rootScope.previousPage) {
+                        $window.location = $rootScope.previousPage;
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
+        } else {
+            $http.put($rootScope.config.baseUrl + 'groups?token=' + $rootScope.sessionUser.token, $scope.group)
+                .success(function() {
+                    if ($rootScope.previousPage) {
+                        $window.location = $rootScope.previousPage;
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
+        }
+    }
 
 });

@@ -1,0 +1,15 @@
+<form ng-submit="save()">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" ng-model="group.name">
+    </div>
+    <div class="form-group">
+        <label for="levelNum">Level Number</label>
+        <input type="text" class="form-control" id="levelNum" ng-model="group.levelNum">
+    </div>
+    <div class="form-group">
+        <label for="parentGroupId">Parent Group ID</label>
+        <input type="text" class="form-control" id="parentGroupId" ng-model="group.parentGroupId">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

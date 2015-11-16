@@ -41,7 +41,6 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Favourites <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Less Favourite</a></li>
 
                 <li>
                     <div class="btn-group" uib-dropdown is-open="status.isopen">
@@ -51,6 +50,20 @@
                         <ul class="uib-dropdown-menu" role="menu" aria-labelledby="group-dropdown-button">
                             <!--<li class="divider"></li>-->
                             <li ng-class="{'active':selectedGroup === grp.id}" ng-repeat="grp in groups | orderBy: ['name']" ng-click="selectGroup(grp.id)" role="menuitem"><a href="#/bookmarks/group/{{ grp.id }}">{{ grp.name }}</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="btn-group" uib-dropdown>
+                        <button id="admin-dropdown-button" type="button" class="btn" uib-dropdown-toggle>
+                            Admin <span class="caret"></span>
+                        </button>
+                        <ul class="uib-dropdown-menu" role="menu" aria-labelledby="admin-dropdown-button">
+                            <li role="menuitem"><a href="#/groups">Groups</a></li>
+                            <li role="menuitem"><a href="#/tags">Tags</a></li>
+                            <li class="divider"></li>
+                            <li role="menuitem"><a href="#/test">Test</a></li>
                         </ul>
                     </div>
                 </li>
