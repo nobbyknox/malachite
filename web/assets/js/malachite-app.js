@@ -156,7 +156,7 @@ malApp.controller('BookmarkController', function ($scope, $rootScope, $routePara
 
 });
 
-malApp.controller('BookmarksOfGroupController', function ($scope, $rootScope, $routeParams, $http) {
+malApp.controller('BookmarksOfGroupController', function ($scope, $rootScope, $routeParams, $http, $window) {
 
     $http.get($rootScope.config.baseUrl + '/bookmarks/group/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
         .success(function (data) {

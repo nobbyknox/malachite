@@ -11,7 +11,7 @@
     <tbody>
         <tr ng-repeat="bkm in bookmarks">
             <td>{{ bkm.id }}</td>
-            <td><a href="#/bookmarks/{{ bkm.id }}">{{ bkm.title }}</a></td>
+            <td><a href="{{ bkm.address }}">[go]</a> &nbsp; <a href="#/bookmarks/{{ bkm.id }}">{{ bkm.title }}</a></td>
             <td>{{ bkm.rating }}</td>
         </tr>
     </tbody>
