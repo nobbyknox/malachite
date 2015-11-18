@@ -40,7 +40,7 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
     $scope.login = function() {
 
 
-        $http.post($rootScope.config.baseUrl + 'authenticate', {'username': $scope.username, 'password': $scope.password})
+        $http.post($rootScope.config.baseUrl + '/authenticate', {'username': $scope.username, 'password': $scope.password})
             .success(function (data) {
 
                 if (data && data.token) {
@@ -59,16 +59,3 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
 
     };
 });
-
-
-// -----------------------------------------------------------------------------
-
-//function guid() {
-//    function s4() {
-//        return Math.floor((1 + Math.random()) * 0x10000)
-//            .toString(16)
-//            .substring(1);
-//    }
-//    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-//        s4() + '-' + s4() + s4() + s4();
-//}
