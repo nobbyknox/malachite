@@ -9,9 +9,9 @@
     },
 
     "webOptions": {
-        "baseUrl": "http://localhost:3003/",
-        "mainAppPath": "",
-        "loginAppPath": "login.html",
+        "baseUrl": "http://localhost:3003",
+        "mainAppPath": "/",
+        "loginAppPath": "/login.html",
         "loginRedirectDelay": 7000,
         "logoutRedirectDelay": 5000
     }
