@@ -62,7 +62,7 @@ malApp.config(function ($routeProvider, $httpProvider) {
 
 malApp.run(function ($rootScope, $http, $location, $window, $cookies) {
 
-    $rootScope.pageTitle = 'Project Malachite';
+    $rootScope.pageTitle = 'Bookmarkly';
 
     $rootScope.sessionUser = $cookies.getObject('bookmarklyLogin');
 
