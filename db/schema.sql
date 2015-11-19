@@ -15,16 +15,17 @@ CREATE TABLE "token_cache" (
 );
 CREATE TABLE "bookmarks" (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`userId`	INTEGER NOT NULL,
 	`title`	TEXT NOT NULL,
 	`address`	TEXT NOT NULL,
 	`dateCreated`	TEXT,
 	`rating`	INTEGER,
-	`userId`	INTEGER NOT NULL
+	`starred`	INTEGER
 );
 CREATE TABLE "groups" (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	`name`	TEXT NOT NULL,
 	`userId`	INTEGER NOT NULL,
+	`name`	TEXT NOT NULL,
 	`levelNum`	INTEGER NOT NULL,
 	`parentGroupId`	INTEGER,
 	`dateCreated`	TEXT
@@ -37,9 +38,9 @@ CREATE TABLE "bookmarks_groups" (
 );
 CREATE TABLE "tags" (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`userId`	INTEGER NOT NULL,
 	`name`	TEXT NOT NULL,
-	`dateCreated`	TEXT,
-	`userId`	INTEGER NOT NULL
+	`dateCreated`	TEXT
 );
 CREATE TABLE "bookmarks_tags" (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
