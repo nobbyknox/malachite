@@ -9,6 +9,10 @@
     margin-top: 8px;
 }
 
+.selectable-row {
+    cursor: pointer;
+}
+
 /*
 body {
     background: url('../images/wordy-web.jpg') no-repeat center center fixed;

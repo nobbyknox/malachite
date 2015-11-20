@@ -8,7 +8,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="grp in groups" ng-click="editGroup(grp.id)">
+        <tr class="selectable-row" ng-repeat="grp in groups" ng-click="editGroup(grp.id)">
             <td>{{ grp.id }}</td>
             <td>{{ grp.name }}</td>
             <td>{{ grp.levelNum }}</td>

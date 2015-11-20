@@ -6,7 +6,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="tag in tags" ng-click="editTag(tag.id)">
+        <tr class="selectable-row" ng-repeat="tag in tags" ng-click="editTag(tag.id)">
             <td>{{ tag.id }}</td>
             <td>{{ tag.name }}</td>
         </tr>
