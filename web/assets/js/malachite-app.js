@@ -120,7 +120,7 @@ malApp.controller('LogoutController', function ($rootScope, $cookies, $window) {
 
 });
 
-malApp.controller('BookmarksController', function($scope, $rootScope, $http) {
+malApp.controller('BookmarksController', function($scope, $rootScope, $http, $window) {
 
     $http.get($rootScope.config.baseUrl + '/bookmarks?token=' + $rootScope.sessionUser.token)
         .success(function (data) {
@@ -133,6 +133,10 @@ malApp.controller('BookmarksController', function($scope, $rootScope, $http) {
             //        $scope.group = data[0] || data;
             //    });
         });
+
+    $scope.editBookmark = function(id) {
+        $window.location = '#/bookmarks/' + id;
+    };
 
 });
 
@@ -190,14 +194,22 @@ malApp.controller('BookmarksOfGroupController', function ($scope, $rootScope, $r
                 });
         });
 
+    $scope.editBookmark = function(id) {
+        $window.location = '#/bookmarks/' + id;
+    };
+
 });
 
-malApp.controller('GroupsController', function ($scope, $rootScope, $routeParams, $http) {
+malApp.controller('GroupsController', function ($scope, $rootScope, $http, $window) {
 
     $http.get($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token)
         .success(function (data) {
             $scope.groups = data;
         });
+
+    $scope.editGroup = function(id) {
+        $window.location = '#/groups/' + id;
+    };
 
 });
 
@@ -241,12 +253,16 @@ malApp.controller('GroupController', function ($scope, $rootScope, $routeParams,
 
 });
 
-malApp.controller('TagsController', function ($scope, $rootScope, $routeParams, $http) {
+malApp.controller('TagsController', function ($scope, $rootScope, $http, $window) {
 
     $http.get($rootScope.config.baseUrl + '/tags?token=' + $rootScope.sessionUser.token)
         .success(function (data) {
             $scope.tags = data;
         });
+
+    $scope.editTag = function(id) {
+        $window.location = '#/tags/' + id;
+    };
 
 });
 

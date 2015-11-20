@@ -6,9 +6,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="tag in tags">
+        <tr ng-repeat="tag in tags" ng-click="editTag(tag.id)">
             <td>{{ tag.id }}</td>
-            <td><a href="#/tags/{{ tag.id }}">{{ tag.name }}</a></td>
+            <td>{{ tag.name }}</td>
         </tr>
     </tbody>
 </table>

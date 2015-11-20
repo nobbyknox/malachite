@@ -9,9 +9,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="bkm in bookmarks">
+        <tr ng-repeat="bkm in bookmarks" ng-click="editBookmark(bkm.id)">
             <td>{{ bkm.id }}</td>
-            <td><a href="{{ bkm.address }}">[go]</a> &nbsp; <a href="#/bookmarks/{{ bkm.id }}">{{ bkm.title }}</a></td>
+            <td><a href="{{ bkm.address }}">{{ bkm.title }}</a></td>
             <td>{{ bkm.rating }}</td>
         </tr>
     </tbody>

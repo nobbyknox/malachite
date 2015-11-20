@@ -8,9 +8,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="grp in groups">
+        <tr ng-repeat="grp in groups" ng-click="editGroup(grp.id)">
             <td>{{ grp.id }}</td>
-            <td><a href="#/groups/{{ grp.id }}">{{ grp.name }}</a></td>
+            <td>{{ grp.name }}</td>
             <td>{{ grp.levelNum }}</td>
             <td>{{ grp.parentGroupId }}</td>
         </tr>
