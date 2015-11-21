@@ -124,7 +124,7 @@ malApp.controller('BookmarksController', function($scope, $rootScope, $http, $wi
 
     $http.get($rootScope.config.baseUrl + '/bookmarks?token=' + $rootScope.sessionUser.token)
         .success(function (data) {
-            console.log('bookmarks: ' + JSON.stringify(data));
+            //console.log('bookmarks: ' + JSON.stringify(data));
             $scope.bookmarks = data;
 
             //$http.get($rootScope.config.baseUrl + '/groups/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
@@ -234,7 +234,7 @@ malApp.controller('GroupController', function ($scope, $rootScope, $routeParams,
             $http.post($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token, $scope.group)
                 .success(function() {
                     if ($rootScope.previousPage) {
-                        $window.location = $rootScope.previousPage;
+                        $window.location = '#/groups';
                     }
                 }, function(err) {
                     console.log(err);
@@ -243,7 +243,7 @@ malApp.controller('GroupController', function ($scope, $rootScope, $routeParams,
             $http.put($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token, $scope.group)
                 .success(function() {
                     if ($rootScope.previousPage) {
-                        $window.location = $rootScope.previousPage;
+                        $window.location = '#/groups';
                     }
                 }, function(err) {
                     console.log(err);
@@ -287,7 +287,7 @@ malApp.controller('TagController', function ($scope, $rootScope, $routeParams, $
             $http.post($rootScope.config.baseUrl + '/tags?token=' + $rootScope.sessionUser.token, $scope.tag)
                 .success(function() {
                     if ($rootScope.previousPage) {
-                        $window.location = $rootScope.previousPage;
+                        $window.location = '#/tags';
                     }
                 }, function(err) {
                     console.log(err);
@@ -296,7 +296,7 @@ malApp.controller('TagController', function ($scope, $rootScope, $routeParams, $
             $http.put($rootScope.config.baseUrl + '/tags?token=' + $rootScope.sessionUser.token, $scope.tag)
                 .success(function() {
                     if ($rootScope.previousPage) {
-                        $window.location = $rootScope.previousPage;
+                        $window.location = '#/tags';
                     }
                 }, function(err) {
                     console.log(err);

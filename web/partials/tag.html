@@ -1,7 +1,25 @@
 <form ng-submit="save()">
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" ng-model="tag.name">
+    <div class="row">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" ng-model="tag.name">
+        </div>
+        <button type="submit" style="display: none">Submit</button>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6" style="margin-top: 7px">
+            <a href="#/tags">← Back to Tags</a>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 text-right">
+            <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-minus"></span>
+                Delete
+            </button>
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>
+                Save
+            </button>
+        </div>
+    </div>
 </form>
