@@ -145,6 +145,7 @@ malApp.controller('BookmarkController', function ($scope, $rootScope, $routePara
 
     $('#title').focus();
 
+    $scope.groups = [];
     $scope.tags = [{text: 'Superman'}, {text: 'Batman'}, {text: 'Wonder Woman'}];
 
     $scope.loadTags = function(query) {
@@ -179,12 +180,30 @@ malApp.controller('BookmarkController', function ($scope, $rootScope, $routePara
 
     $scope.save = function() {
 
+        var bookmarkWrapper = {
+            model: $scope.bookmark,
+            groupNames: $scope.groups,
+            tagNames: []
+        };
+
+        if ($scope.groups && $scope.groups.length > 0) {
+            $scope.groups.forEach(function(item) {
+                bookmarkWrapper.groupNames.push(item.text);
+            });
+        }
+
+        if ($scope.tags && $scope.tags.length > 0) {
+            $scope.tags.forEach(function(item) {
+                bookmarkWrapper.tagNames.push(item.text);
+            });
+        }
+
         if ($routeParams.id === 'new') {
 
-            $scope.bookmark.userId = $rootScope.sessionUser.userId;
-            $scope.bookmark.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');  // TODO: Get format from config
+            bookmarkWrapper.model.userId = $rootScope.sessionUser.userId;
+            bookmarkWrapper.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');  // TODO: Get format from config
 
-            $http.post($rootScope.config.baseUrl + '/bookmarks?token=' + $rootScope.sessionUser.token, $scope.bookmark)
+            $http.post($rootScope.config.baseUrl + '/bookmarks?token=' + $rootScope.sessionUser.token, bookmarkWrapper)
                 .success(function() {
                     if ($rootScope.previousPage) {
                         $window.location = $rootScope.previousPage;
@@ -193,7 +212,8 @@ malApp.controller('BookmarkController', function ($scope, $rootScope, $routePara
                     console.log(err);
                 });
         } else {
-            $http.put($rootScope.config.baseUrl + '/bookmarks?token=' + $rootScope.sessionUser.token, $scope.bookmark)
+
+            $http.put($rootScope.config.baseUrl + '/bookmarks?token=' + $rootScope.sessionUser.token, bookmarkWrapper)
                 .success(function() {
                     if ($rootScope.previousPage) {
                         $window.location = $rootScope.previousPage;
