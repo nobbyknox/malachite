@@ -142,6 +142,8 @@ malApp.controller('BookmarksController', function($scope, $rootScope, $http, $wi
 
 malApp.controller('BookmarkController', function ($scope, $rootScope, $routeParams, $http, $window) {
 
+    $('#title').focus();
+
     if ($routeParams.id === 'new') {
         $scope.bookmark = {};
     } else {
@@ -215,6 +217,8 @@ malApp.controller('GroupsController', function ($scope, $rootScope, $http, $wind
 
 malApp.controller('GroupController', function ($scope, $rootScope, $routeParams, $http, $window) {
 
+    $('#name').focus();
+
     if ($routeParams.id === 'new') {
         $scope.group = {};
     } else {
@@ -267,6 +271,8 @@ malApp.controller('TagsController', function ($scope, $rootScope, $http, $window
 });
 
 malApp.controller('TagController', function ($scope, $rootScope, $routeParams, $http, $window) {
+
+    $('#name').focus();
 
     if ($routeParams.id === 'new') {
         $scope.tag = {};
