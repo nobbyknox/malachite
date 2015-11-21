@@ -3,7 +3,8 @@
 var malApp = angular.module('malApp', [
     'ngRoute',
     'ngCookies',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngTagsInput'
 ]);
 
 malApp.config(function ($routeProvider, $httpProvider) {
@@ -140,9 +141,32 @@ malApp.controller('BookmarksController', function($scope, $rootScope, $http, $wi
 
 });
 
-malApp.controller('BookmarkController', function ($scope, $rootScope, $routeParams, $http, $window) {
+malApp.controller('BookmarkController', function ($scope, $rootScope, $routeParams, $http, $window, $q) {
 
     $('#title').focus();
+
+    $scope.tags = [{text: 'Superman'}, {text: 'Batman'}, {text: 'Wonder Woman'}];
+
+    $scope.loadTags = function(query) {
+
+        var deferred = $q.defer();
+
+        $http.get($rootScope.config.baseUrl + '/tags?token=' + $rootScope.sessionUser.token + '&search=' + query)
+            .success(function(data) {
+                var retArray = [ { text: query }];
+
+                if (data && data.length > 0) {
+                    data.forEach(function(item) {
+                        retArray.push({ text: item.name });
+                    });
+
+                }
+
+                deferred.resolve(retArray);
+            });
+
+        return deferred.promise;
+    };
 
     if ($routeParams.id === 'new') {
         $scope.bookmark = {};
