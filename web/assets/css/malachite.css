@@ -1,3 +1,8 @@
+body {
+    background: url('../images/wordy-web-main.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
@@ -12,10 +17,3 @@
 .selectable-row {
     cursor: pointer;
 }
-
-/*
-body {
-    background: url('../images/wordy-web.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
-*/
