@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="selectable-row" ng-repeat="bkm in bookmarks" ng-click="editBookmark(bkm.id)">
+        <tr class="selectable-row" ng-repeat="bkm in bookmarks | orderBy: ['title']" ng-click="editBookmark(bkm.id)">
             <td>{{ bkm.id }}</td>
             <td><a href="{{ bkm.address }}">{{ bkm.title }}</a></td>
             <td>{{ bkm.rating }}</td>

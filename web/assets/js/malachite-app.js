@@ -146,7 +146,28 @@ malApp.controller('BookmarkController', function ($scope, $rootScope, $routePara
     $('#title').focus();
 
     $scope.groups = [];
-    $scope.tags = [{text: 'Superman'}, {text: 'Batman'}, {text: 'Wonder Woman'}];
+    $scope.tags = [];
+
+    $scope.loadGroups = function(query) {
+
+        var deferred = $q.defer();
+
+        $http.get($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token + '&search=' + query)
+            .success(function(data) {
+                var retArray = [ { text: query }];
+
+                if (data && data.length > 0) {
+                    data.forEach(function(item) {
+                        retArray.push({ text: item.name });
+                    });
+
+                }
+
+                deferred.resolve(retArray);
+            });
+
+        return deferred.promise;
+    };
 
     $scope.loadTags = function(query) {
 
@@ -175,6 +196,32 @@ malApp.controller('BookmarkController', function ($scope, $rootScope, $routePara
         $http.get($rootScope.config.baseUrl + '/bookmarks/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
             .success(function (data) {
                 $scope.bookmark = data[0] || data;
+
+                if ($scope.bookmark && $scope.bookmark.groups) {
+
+                    var tmpGroupArray = [];
+
+                    $scope.bookmark.groups.forEach(function(groupItem) {
+                        tmpGroupArray.push(groupItem.name);
+                    });
+
+                    if (tmpGroupArray && tmpGroupArray.length > 0) {
+                        $scope.groups = tmpGroupArray;
+                    }
+                }
+
+                if ($scope.bookmark && $scope.bookmark.tags) {
+
+                    var tmpTagArray = [];
+
+                    $scope.bookmark.tags.forEach(function(tagItem) {
+                        tmpTagArray.push(tagItem.name);
+                    });
+
+                    if (tmpTagArray && tmpTagArray.length > 0) {
+                        $scope.tags = tmpTagArray;
+                    }
+                }
             });
     }
 
@@ -182,9 +229,12 @@ malApp.controller('BookmarkController', function ($scope, $rootScope, $routePara
 
         var bookmarkWrapper = {
             model: $scope.bookmark,
-            groupNames: $scope.groups,
+            groupNames: [],
             tagNames: []
         };
+
+        delete bookmarkWrapper.model.groups;
+        delete bookmarkWrapper.model.tags;
 
         if ($scope.groups && $scope.groups.length > 0) {
             $scope.groups.forEach(function(item) {

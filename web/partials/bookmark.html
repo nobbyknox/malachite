@@ -13,6 +13,12 @@
             <input type="text" class="form-control" id="rating" placeholder="1-5" ng-model="bookmark.rating">
         </div>
         <div class="form-group">
+            <label>Groups</label>
+            <tags-input ng-model="groups" id="groups" placeholder="Add a group" replace-spaces-with-dashes="false">
+                <auto-complete source="loadGroups($query)" debounce-delay="500" min-length="3"></auto-complete>
+            </tags-input>
+        </div>
+        <div class="form-group">
             <label>Tags</label>
             <tags-input ng-model="tags" id="tags" placeholder="Add a tag" replace-spaces-with-dashes="false">
                 <auto-complete source="loadTags($query)" debounce-delay="500" min-length="3"></auto-complete>
