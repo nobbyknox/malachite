@@ -21,6 +21,12 @@
         <form class="form-signin">
             <h2 class="form-signin-heading">Welcome to Bookmarkly</h2>
             <h3>Please sign in</h3>
+
+            <div id="passwordAlert" class="alert alert-danger alert-dismissible" role="alert" style="display: none">
+                <button type="button" class="close" data-hide="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Oops!</strong> Invalid username or password.
+            </div>
+
             <label for="inputEmail" class="sr-only">Email address</label>
             <input type="text" id="inputEmail" ng-model="username" class="form-control" placeholder="Username or email address" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
@@ -39,6 +45,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-sanitize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-cookies.min.js"></script>
 <script src="assets/js/login-app.js"></script>
+
+<script>
+    $(function(){
+        $("[data-hide]").on("click", function(){
+            $("." + $(this).attr("data-hide")).hide();
+        });
+    });
+</script>
 
 </body>
 </html>
