@@ -44,12 +44,18 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
             .then(function (serverResponse) {
 
                 console.log(JSON.stringify(serverResponse));
+                console.log('Token: ' + serverResponse.data.token);
 
                 var cookiePayload = {
                     userId: serverResponse.id,
                     username: $scope.username,
                     token: serverResponse.data.token
                 };
+
+                //setTimeout(function() {
+                //    $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
+                //    $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
+                //}, 10000);
 
                 $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
                 $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
