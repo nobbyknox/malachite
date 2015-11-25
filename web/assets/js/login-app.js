@@ -39,7 +39,6 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
 
     $scope.login = function() {
 
-
         $http.post($rootScope.config.baseUrl + '/authenticate', {'username': $scope.username, 'password': $scope.password})
             .then(function (serverResponse) {
 
@@ -52,11 +51,6 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
                     token: serverResponse.data.token
                 };
 
-                //setTimeout(function() {
-                //    $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
-                //    $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
-                //}, 10000);
-
                 $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
                 $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
 
@@ -64,7 +58,6 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
                 $('#passwordAlert').show();
                 //$('#passwordAlert').alert();
             });
-
 
     };
 });
