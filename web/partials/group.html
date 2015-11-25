@@ -1,4 +1,7 @@
 <form ng-submit="save()">
+
+    <div class="row"><h3>Group <span class="glyphicon glyphicon-chevron-right"></span> {{ group.name }}</h3></div>
+
     <div class="row">
         <div class="form-group">
             <label for="name">Name</label>
@@ -12,7 +15,6 @@
             <label for="parentGroupId">Parent Group ID</label>
             <input type="text" class="form-control" id="parentGroupId" ng-model="group.parentGroupId">
         </div>
-        <button type="submit" style="display: none">Submit</button>
     </div>
 
     <div class="row">
