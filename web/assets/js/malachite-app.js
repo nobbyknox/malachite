@@ -195,7 +195,9 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
     };
 
     if ($routeParams.id === 'new') {
-        $scope.bookmark = {};
+        $scope.bookmark = {
+            rating: 1
+        };
     } else {
         $http.get($rootScope.config.baseUrl + '/bookmarks/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
             .success(function(data) {
