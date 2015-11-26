@@ -162,7 +162,9 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
 
                 if (data && data.length > 0) {
                     data.forEach(function(item) {
-                        retArray.push({text: item.name});
+                        if (item.name !== query) {
+                            retArray.push({text: item.name});
+                        }
                     });
 
                 }
@@ -183,7 +185,9 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
 
                 if (data && data.length > 0) {
                     data.forEach(function(item) {
-                        retArray.push({text: item.name});
+                        if (item.name !== query) {
+                            retArray.push({text: item.name});
+                        }
                     });
 
                 }
