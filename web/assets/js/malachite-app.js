@@ -35,6 +35,10 @@ malApp.config(function($routeProvider) {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksController'
         })
+        //.when('/bookmarks/starred', {
+        //    templateUrl: 'partials/bookmarks.html',
+        //    controller: 'StarredBookmarksController'
+        //})
         .when('/bookmarks/group/:groupId', {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksOfGroupController'
@@ -78,10 +82,10 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
                 $rootScope.sessionUser = null;
                 $cookies.remove('bookmarklyLogin');
                 console.log(JSON.stringify(response));
-                //console.log('Redirecting you to the login page');
-                //$window.location = '/login.html';
             });
 
+    } else {
+        $location.path('/login');
     }
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
@@ -95,7 +99,7 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
 
 });
 
-malApp.controller('IndexController', function($rootScope) {
+malApp.controller('IndexController', function($rootScope, $window) {
 });
 
 malApp.controller('TestController', function($rootScope) {
@@ -125,18 +129,18 @@ malApp.controller('LogoutController', function($rootScope, $cookies, $window) {
 
 });
 
-malApp.controller('BookmarksController', function($scope, $rootScope, $http, $window) {
+malApp.controller('BookmarksController', function($scope, $rootScope, $routeParams, $http, $window) {
 
-    $http.get($rootScope.config.baseUrl + '/bookmarks?token=' + $rootScope.sessionUser.token)
+    var path = '/bookmarks?token=' + $rootScope.sessionUser.token;
+
+    if ($routeParams.starred) {
+        path += '&starred=' + $routeParams.starred;
+        $scope.starred = true;
+    }
+
+    $http.get($rootScope.config.baseUrl + path)
         .success(function(data) {
-            //console.log('bookmarks: ' + JSON.stringify(data));
             $scope.bookmarks = data;
-
-            //$http.get($rootScope.config.baseUrl + '/groups/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
-            //    .success(function(data) {
-            //        //console.log(data);
-            //        $scope.group = data[0] || data;
-            //    });
         });
 
     $scope.editBookmark = function(id) {
@@ -235,6 +239,14 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
             });
     }
 
+    $scope.toggleStar = function() {
+        if ($scope.bookmark.starred === 1) {
+            $scope.bookmark.starred = 0;
+        } else {
+            $scope.bookmark.starred = 1;
+        }
+    };
+
     $scope.save = function() {
 
         var bookmarkWrapper = {
@@ -285,6 +297,23 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
     }
 
 });
+
+//malApp.controller('StarredBookmarksController', function($scope, $rootScope, $routeParams, $http, $window) {
+//
+//    console.log('Top of StarredBookmarksController');
+//
+//    $http.get($rootScope.config.baseUrl + '/bookmarks?starred=1&token=' + $rootScope.sessionUser.token)
+//        .then(function(data) {
+//            $scope.bookmarks = data.data;
+//        }, function(response) {
+//            console.log(JSON.stringify(response));
+//        });
+//
+//    $scope.editBookmark = function(id) {
+//        $window.location = '#/bookmarks/' + id;
+//    };
+//
+//});
 
 malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $routeParams, $http, $window) {
 
