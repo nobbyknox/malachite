@@ -30,6 +30,10 @@
                 <auto-complete source="loadTags($query)" debounce-delay="500" min-length="3"></auto-complete>
             </tags-input>
         </div>
+        <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea id="notes" class="form-control" ng-model="bookmark.notes" rows="3" maxlength="1024"></textarea>
+        </div>
     </div>
 
     <div class="row">
