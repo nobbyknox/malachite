@@ -133,7 +133,6 @@
                 <form ng-submit="sendFeedback()">
                     <div class="form-group">
                         <label for="feedback-subject" class="control-label">Subject:</label>
-                        <!--<input type="text" class="form-control" id="feedback-subject" ng-model="feedbackSubject">-->
                         <select class="form-control" id="feedback-subject" ng-model="feedbackSubject">
                             <option ng-repeat="option in feedbackSubjects" value="{{option}}">{{option}}</option>
                         </select>
@@ -165,6 +164,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.0.0/ng-tags-input.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 <script src="assets/js/malachite-app.js"></script>
+
+<script>
+    $('#feedbackModal').on('shown.bs.modal', function () {
+        alert('Feature coming soon');
+    });
+</script>
 
 </body>
 </html>

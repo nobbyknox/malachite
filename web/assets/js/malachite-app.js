@@ -78,7 +78,7 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
     if ($rootScope.sessionUser) {
         $http.post('/validatetoken', { token: $rootScope.sessionUser.token })
             .then(function() {
-                console.log('Token is valid. Welcome back, %s', $rootScope.sessionUser.screenName);
+                console.log('Welcome back, %s', $rootScope.sessionUser.screenName);
                 bootstrapApp($rootScope, $http);
             }, function(response) {
                 $rootScope.sessionUser = null;
