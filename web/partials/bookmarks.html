@@ -1,68 +1,13 @@
 <div class="row">
     <h3 ng-show="group">{{ group.name }}</h3>
-
     <h3 ng-show="starred">Starred</h3>
 </div>
 
+<!--
 <div class="main-body">
     <ul class="trendings">
-        <div class="trending-item">
-            <!--<img class="trending-image" src="https://s3-us-west-1.amazonaws.com/delicious-curated-images/img/Trending+11_23/fire.jpg">-->
-            <img class="trending-image" src="thumbs/rendermulti-1.png">
-
-            <li class="trending">
-                <div class="trending-link"><a href="http://di.gg/21erz8p" class="trending-title">This Fire Tornado In
-                    Slow
-                    Motion Is Absolutely Incredible</a></div>
-                <div class="my-action">
-                    <span class="glyphicon glyphicon-star-empty unstarred"></span>
-                    <br>
-                    <a href="#">edit</a>
-                    <a href="#">delete</a>
-                    <a href="#">share</a>
-                </div>
-            </li>
-        </div>
-
-        <div class="trending-item">
-            <!--<img class="trending-image" src="https://s3-us-west-1.amazonaws.com/delicious-curated-images/img/Trending+11_24/mars.jpg" >-->
-            <img class="trending-image" src="thumbs/rendermulti-2.png">
-
-            <li class="trending">
-                <div class="trending-link"><a href="http://bit.ly/1YsfQRj" class="trending-title">Manned Mission to Mars
-                    Must Not Ignore Human Struggles, Expert Stresses</a></div>
-                <div class="my-action">
-                    <span class="glyphicon glyphicon-star-empty unstarred"></span>
-                    <a href="#">edit</a>
-                </div>
-            </li>
-        </div>
-
-        <div class="trending-item">
-            <!--<img class="trending-image" src="https://s3-us-west-1.amazonaws.com/delicious-curated-images/img/Trending+11_24/rocket.jpg">-->
-            <img class="trending-image" src="thumbs/rendermulti-3.png">
-
-            <li class="trending">
-                <div class="trending-link"><a href="http://bit.ly/1YsfQRj" class="trending-title">Google</a></div>
-                <div class="my-action">
-                    <span class="glyphicon glyphicon-star starred"></span>
-                    <a href="#">edit</a>
-                </div>
-            </li>
-        </div>
-
-        <div class="trending-item">
-            <!--<img class="trending-image" src="https://s3-us-west-1.amazonaws.com/delicious-curated-images/img/Trending+11_24/rocket.jpg">-->
-            <img class="trending-image" src="thumbs/rendermulti-4.png">
-
-            <li class="trending">
-                <div class="trending-link"><a href="http://bit.ly/1YsfQRj" class="trending-title">Youtube</a></div>
-                <div class="my-action">
-                    <span class="glyphicon glyphicon-star-empty unstarred"></span>
-                    <a href="#">edit</a>
-                </div>
-            </li>
-        </div>
-
     </ul>
 </div>
+-->
+
+<div bookmark-tile ng-repeat="bookmark in bookmarks"></div>

@@ -461,6 +461,17 @@ malApp.controller('AboutController', function($scope, $rootScope, $http, $window
 
 
 // -----------------------------------------------------------------------------
+// Directives
+// -----------------------------------------------------------------------------
+
+angular.module('malApp').directive('bookmarkTile', function () {
+    return {
+        templateUrl: 'partials/templates/bookmark-tile.html'
+    };
+});
+
+
+// -----------------------------------------------------------------------------
 // Private functions
 // -----------------------------------------------------------------------------
 
