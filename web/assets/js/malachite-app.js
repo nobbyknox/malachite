@@ -69,6 +69,9 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
 
     $rootScope.pageTitle = 'Bookmarkly';
     $rootScope.searchQuery = '';
+    $rootScope.feedbackSubjects = ['I have a suggestion', 'I found a problem'];
+    $rootScope.feedbackSubject = $rootScope.feedbackSubjects[0];
+    $rootScope.feedbackBody = '';
 
     $rootScope.sessionUser = $cookies.getObject('bookmarklyLogin');
 
@@ -105,6 +108,16 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
             $window.location = '#/bookmarks?query=' + $rootScope.searchQuery;
         }
     };
+
+    $rootScope.sendFeedback = function() {
+        console.log('Subject: ' + $rootScope.feedbackSubject);
+        console.log('Body: ' + $rootScope.feedbackBody);
+
+        $rootScope.feedbackSubject = $rootScope.feedbackSubjects[0];
+        $rootScope.feedbackBody = '';
+
+        $('#feedbackModal').modal('hide');
+    }
 
 });
 

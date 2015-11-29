@@ -9,7 +9,7 @@
 
     <title>{{ pageTitle }}</title>
 
-    <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="/favicon.ico" rel="icon" type="image/x-icon"/>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -43,17 +43,21 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#/bookmarks/new" title="Add bookmark"><span class="glyphicon glyphicon-plus"></span></a></li>
+                <li><a href="#/bookmarks/new" title="Add bookmark"><span class="glyphicon glyphicon-plus"></span></a>
+                </li>
                 <li><a href="#/bookmarks?starred=1"><span class="glyphicon glyphicon-star"></span></a></li>
 
                 <li>
                     <div class="btn-group" uib-dropdown is-open="status.isopen">
-                        <button id="group-dropdown-button" type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">
+                        <button id="group-dropdown-button" type="button" class="btn" uib-dropdown-toggle
+                                ng-disabled="disabled">
                             <span class="glyphicon glyphicon-bookmark"></span> <span class="caret"></span>
                         </button>
                         <ul class="uib-dropdown-menu" role="menu" aria-labelledby="group-dropdown-button">
                             <!--<li class="divider"></li>-->
-                            <li ng-class="{'active':selectedGroup === grp.id}" ng-repeat="grp in groups | orderBy: ['name']" ng-click="selectGroup(grp.id)" role="menuitem"><a href="#/bookmarks/group/{{ grp.id }}">{{ grp.name }}</a></li>
+                            <li ng-class="{'active':selectedGroup === grp.id}"
+                                ng-repeat="grp in groups | orderBy: ['name']" ng-click="selectGroup(grp.id)"
+                                role="menuitem"><a href="#/bookmarks/group/{{ grp.id }}">{{ grp.name }}</a></li>
                         </ul>
                     </div>
                 </li>
@@ -77,15 +81,17 @@
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" ng-model="searchQuery" ng-change="search()">
+                    <input type="text" class="form-control" placeholder="Search" ng-model="searchQuery"
+                           ng-change="search()">
                 </div>
                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="#/logout">Log out</a></li>-->
+                <li><a data-toggle="modal" data-target="#feedbackModal">Feedback</a></li>
                 <li class="dropdown">
                     <div class="btn-group" uib-dropdown>
-                        <button id="profile-dropdown-button" type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">
+                        <button id="profile-dropdown-button" type="button" class="btn" uib-dropdown-toggle
+                                ng-disabled="disabled">
                             {{ sessionUser.screenName }} <span class="caret"></span>
                         </button>
                         <ul class="uib-dropdown-menu" role="menu" aria-labelledby="profile-dropdown-button">
@@ -115,6 +121,36 @@
 </div>
 <!-- /container -->
 
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="feedbackModalLabel">Feedback</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="sendFeedback()">
+                    <div class="form-group">
+                        <label for="feedback-subject" class="control-label">Subject:</label>
+                        <!--<input type="text" class="form-control" id="feedback-subject" ng-model="feedbackSubject">-->
+                        <select class="form-control" id="feedback-subject" ng-model="feedbackSubject">
+                            <option ng-repeat="option in feedbackSubjects" value="{{option}}">{{option}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-body" class="control-label">Message:</label>
+                        <textarea class="form-control" id="feedback-body" ng-model="feedbackBody"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sendFeedback()">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
