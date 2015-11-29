@@ -91,6 +91,10 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
 
+        if (!next.includes('/bookmarks')) {
+            $rootScope.searchQuery = '';
+        }
+
         $rootScope.previousPage = current;
 
         if (!$rootScope.sessionUser) {
@@ -308,23 +312,6 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
     }
 
 });
-
-//malApp.controller('StarredBookmarksController', function($scope, $rootScope, $routeParams, $http, $window) {
-//
-//    console.log('Top of StarredBookmarksController');
-//
-//    $http.get($rootScope.config.baseUrl + '/bookmarks?starred=1&token=' + $rootScope.sessionUser.token)
-//        .then(function(data) {
-//            $scope.bookmarks = data.data;
-//        }, function(response) {
-//            console.log(JSON.stringify(response));
-//        });
-//
-//    $scope.editBookmark = function(id) {
-//        $window.location = '#/bookmarks/' + id;
-//    };
-//
-//});
 
 malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $routeParams, $http, $window) {
 
