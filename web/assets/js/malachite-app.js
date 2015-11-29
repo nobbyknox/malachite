@@ -59,6 +59,10 @@ malApp.config(function($routeProvider) {
             templateUrl: 'partials/tag.html',
             controller: 'TagController'
         })
+        .when('/about', {
+            templateUrl: 'partials/about.html',
+            controller: 'AboutController'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -443,6 +447,9 @@ malApp.controller('TagController', function($scope, $rootScope, $routeParams, $h
         }
     }
 
+});
+
+malApp.controller('AboutController', function($scope, $rootScope, $http, $window) {
 });
 
 
