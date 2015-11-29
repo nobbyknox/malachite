@@ -180,13 +180,12 @@ img {
 .my-action {
     height: auto;
     padding-left: 13px;
-    /*width: 80%;*/
     line-height: 1.168em;
     background: #FFF;
-    /*position: relative;*/
     z-index: 50;
 }
 
 .my-action a {
-    color: rgb(192, 41, 41);
+    color: rgb(22, 138, 222);
+    font-weight: 700;
 }
