@@ -1,2 +1,2 @@
 -- 2015-11-27
-alter table bookmarks add column notes text;
+ALTER TABLE "bookmarks" ADD COLUMN `notes` TEXT;
