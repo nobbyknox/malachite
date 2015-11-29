@@ -68,6 +68,7 @@ malApp.config(function($routeProvider) {
 malApp.run(function($rootScope, $http, $location, $window, $cookies) {
 
     $rootScope.pageTitle = 'Bookmarkly';
+    $rootScope.searchQuery = '';
 
     $rootScope.sessionUser = $cookies.getObject('bookmarklyLogin');
 
@@ -96,6 +97,12 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
             $location.path('/login');
         }
     });
+
+    $rootScope.search = function() {
+        if ($rootScope.searchQuery.length >= 3) {
+            $window.location = '#/bookmarks?query=' + $rootScope.searchQuery;
+        }
+    };
 
 });
 
@@ -136,6 +143,10 @@ malApp.controller('BookmarksController', function($scope, $rootScope, $routePara
     if ($routeParams.starred) {
         path += '&starred=' + $routeParams.starred;
         $scope.starred = true;
+    }
+
+    if ($routeParams.query) {
+        path += '&query=' + $routeParams.query;
     }
 
     $http.get($rootScope.config.baseUrl + path)

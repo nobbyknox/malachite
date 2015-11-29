@@ -76,30 +76,18 @@
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search" ng-model="searchQuery" ng-change="search()">
                 </div>
                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <!--<li><a href="#/logout">Log out</a></li>-->
                 <li class="dropdown">
-<!--
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Leonie <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Change Password</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Water Plants</a></li>
-                        <li><a href="#">Watch Star Wars Episode V</a></li>
-                    </ul>
--->
                     <div class="btn-group" uib-dropdown>
                         <button id="profile-dropdown-button" type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">
                             {{ sessionUser.username }} <span class="caret"></span>
                         </button>
                         <ul class="uib-dropdown-menu" role="menu" aria-labelledby="profile-dropdown-button">
-                            <!--<li class="divider"></li>-->
                             <li role="menuitem"><a href="#/test">Profile</a></li>
                             <li role="menuitem"><a href="#/test">Change Password</a></li>
                             <li class="divider"></li>
