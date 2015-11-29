@@ -35,10 +35,6 @@ malApp.config(function($routeProvider) {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksController'
         })
-        //.when('/bookmarks/starred', {
-        //    templateUrl: 'partials/bookmarks.html',
-        //    controller: 'StarredBookmarksController'
-        //})
         .when('/bookmarks/group/:groupId', {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksOfGroupController'
@@ -77,11 +73,9 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
     $rootScope.sessionUser = $cookies.getObject('bookmarklyLogin');
 
     if ($rootScope.sessionUser) {
-
         $http.post('/validatetoken', { token: $rootScope.sessionUser.token })
             .then(function() {
-                console.log('Token %s is valid', $rootScope.sessionUser.token);
-                console.log('Welcome back, %s', $rootScope.sessionUser.username);
+                console.log('Token is valid. Welcome back, %s', $rootScope.sessionUser.screenName);
                 bootstrapApp($rootScope, $http);
             }, function(response) {
                 $rootScope.sessionUser = null;

@@ -42,21 +42,23 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
         $http.post($rootScope.config.baseUrl + '/authenticate', {'username': $scope.username, 'password': $scope.password})
             .then(function (serverResponse) {
 
-                console.log(JSON.stringify(serverResponse));
-                console.log('Token: ' + serverResponse.data.token);
+                //console.log('Response from auth service: ' + JSON.stringify(serverResponse));
+                //console.log('Token: ' + serverResponse.data.token);
 
                 var cookiePayload = {
-                    userId: serverResponse.id,
-                    username: $scope.username,
+                    userId: serverResponse.data.userId,
+                    username: serverResponse.data.username,
+                    screenName: serverResponse.data.screenName,
                     token: serverResponse.data.token
                 };
+
+                //console.log('Written cookie: ', cookiePayload);
 
                 $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
                 $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
 
             }, function(err) {
                 $('#passwordAlert').show();
-                //$('#passwordAlert').alert();
             });
 
     };
