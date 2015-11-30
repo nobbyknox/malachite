@@ -77,3 +77,25 @@
     font-size: 10px;
     color: gray;
 }
+
+/* iPhone 6s Plus */
+@media screen and (max-width: 768px) {
+    .tile-item {
+        position: relative;
+        width: 46%;
+        float: left;
+        margin: 0 1.15%;
+        z-index: 200;
+    }
+}
+
+/* iPhone 4s */
+@media screen and (max-width: 320px) {
+    .tile-item {
+        position: relative;
+        width: 96%;
+        float: left;
+        margin: 0 1.15%;
+        z-index: 200;
+    }
+}
