@@ -129,12 +129,9 @@ malApp.controller('TestController', function($rootScope) {
 
 malApp.controller('LoginController', function($rootScope, $window) {
 
-    var delay = ($rootScope.config ? $rootScope.config.loginRedirectDelay : 5000);
-    var location = ($rootScope.config ? $rootScope.config.baseUrl + $rootScope.config.loginAppPath : '/login.html');
-
     setTimeout(function() {
-        $window.location = location;
-    }, delay);
+        $window.location = '/login.html';
+    }, 5000);
 
 });
 
@@ -143,11 +140,9 @@ malApp.controller('LogoutController', function($rootScope, $cookies, $window) {
     $cookies.remove('bookmarklyLogin');
     $rootScope.sessionUser = null;
 
-    if ($rootScope.config.logoutRedirectDelay > 0) {
-        setTimeout(function() {
-            $window.location = $rootScope.config.baseUrl + $rootScope.config.loginAppPath;
-        }, $rootScope.config.logoutRedirectDelay);
-    }
+    setTimeout(function() {
+        $window.location = '/login.html';
+    }, 4000);
 
 });
 
@@ -164,7 +159,7 @@ malApp.controller('BookmarksController', function($scope, $rootScope, $routePara
         path += '&query=' + $routeParams.query;
     }
 
-    $http.get($rootScope.config.baseUrl + path)
+    $http.get(path)
         .success(function(data) {
             $scope.bookmarks = data;
         });
@@ -186,7 +181,7 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
 
         var deferred = $q.defer();
 
-        $http.get($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token + '&search=' + query)
+        $http.get('/groups?token=' + $rootScope.sessionUser.token + '&search=' + query)
             .success(function(data) {
                 var retArray = [{text: query}];
 
@@ -209,7 +204,7 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
 
         var deferred = $q.defer();
 
-        $http.get($rootScope.config.baseUrl + '/tags?token=' + $rootScope.sessionUser.token + '&search=' + query)
+        $http.get('/tags?token=' + $rootScope.sessionUser.token + '&search=' + query)
             .success(function(data) {
                 var retArray = [{text: query}];
 
@@ -233,7 +228,7 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
             rating: 1
         };
     } else {
-        $http.get($rootScope.config.baseUrl + '/bookmarks/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
+        $http.get('/bookmarks/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
             .success(function(data) {
                 $scope.bookmark = data[0] || data;
 
@@ -301,7 +296,7 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
             bookmarkWrapper.model.userId = $rootScope.sessionUser.userId;
             bookmarkWrapper.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');  // TODO: Get format from config
 
-            $http.post($rootScope.config.baseUrl + '/bookmarks?token=' + $rootScope.sessionUser.token, bookmarkWrapper)
+            $http.post('/bookmarks?token=' + $rootScope.sessionUser.token, bookmarkWrapper)
                 .success(function() {
                     if ($rootScope.previousPage) {
                         $window.location = $rootScope.previousPage;
@@ -311,7 +306,7 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
                 });
         } else {
 
-            $http.put($rootScope.config.baseUrl + '/bookmarks?token=' + $rootScope.sessionUser.token, bookmarkWrapper)
+            $http.put('/bookmarks?token=' + $rootScope.sessionUser.token, bookmarkWrapper)
                 .success(function() {
                     if ($rootScope.previousPage) {
                         $window.location = $rootScope.previousPage;
@@ -326,11 +321,11 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
 
 malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $routeParams, $http, $window) {
 
-    $http.get($rootScope.config.baseUrl + '/bookmarks/group/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
+    $http.get('/bookmarks/group/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
         .then(function(data) {
             $scope.bookmarks = data.data;
 
-            $http.get($rootScope.config.baseUrl + '/groups/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
+            $http.get('/groups/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
                 .then(function(response) {
                     $scope.group = response.data[0] || response.data;
                 }, function(response) {
@@ -348,7 +343,7 @@ malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $ro
 
 malApp.controller('GroupsController', function($scope, $rootScope, $http, $window) {
 
-    $http.get($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token)
+    $http.get('/groups?token=' + $rootScope.sessionUser.token)
         .success(function(data) {
             $scope.groups = data;
         });
@@ -366,7 +361,7 @@ malApp.controller('GroupController', function($scope, $rootScope, $routeParams, 
     if ($routeParams.id === 'new') {
         $scope.group = {};
     } else {
-        $http.get($rootScope.config.baseUrl + '/groups/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
+        $http.get('/groups/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
             .success(function(data) {
                 $scope.group = data[0] || data;
             });
@@ -379,7 +374,7 @@ malApp.controller('GroupController', function($scope, $rootScope, $routeParams, 
             $scope.group.userId = $rootScope.sessionUser.userId;
             $scope.group.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');  // TODO: Get format from config
 
-            $http.post($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token, $scope.group)
+            $http.post('/groups?token=' + $rootScope.sessionUser.token, $scope.group)
                 .success(function() {
                     if ($rootScope.previousPage) {
                         $window.location = '#/groups';
@@ -388,7 +383,7 @@ malApp.controller('GroupController', function($scope, $rootScope, $routeParams, 
                     console.log(err);
                 });
         } else {
-            $http.put($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token, $scope.group)
+            $http.put('/groups?token=' + $rootScope.sessionUser.token, $scope.group)
                 .success(function() {
                     if ($rootScope.previousPage) {
                         $window.location = '#/groups';
@@ -403,7 +398,7 @@ malApp.controller('GroupController', function($scope, $rootScope, $routeParams, 
 
 malApp.controller('TagsController', function($scope, $rootScope, $http, $window) {
 
-    $http.get($rootScope.config.baseUrl + '/tags?token=' + $rootScope.sessionUser.token)
+    $http.get('/tags?token=' + $rootScope.sessionUser.token)
         .success(function(data) {
             $scope.tags = data;
         });
@@ -421,7 +416,7 @@ malApp.controller('TagController', function($scope, $rootScope, $routeParams, $h
     if ($routeParams.id === 'new') {
         $scope.tag = {};
     } else {
-        $http.get($rootScope.config.baseUrl + '/tags/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
+        $http.get('/tags/' + $routeParams.id + '?token=' + $rootScope.sessionUser.token)
             .success(function(data) {
                 $scope.tag = data[0] || data;
             });
@@ -434,7 +429,7 @@ malApp.controller('TagController', function($scope, $rootScope, $routeParams, $h
             $scope.tag.userId = $rootScope.sessionUser.userId;
             $scope.tag.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');  // TODO: Get format from config
 
-            $http.post($rootScope.config.baseUrl + '/tags?token=' + $rootScope.sessionUser.token, $scope.tag)
+            $http.post('/tags?token=' + $rootScope.sessionUser.token, $scope.tag)
                 .success(function() {
                     if ($rootScope.previousPage) {
                         $window.location = '#/tags';
@@ -443,7 +438,7 @@ malApp.controller('TagController', function($scope, $rootScope, $routeParams, $h
                     console.log(err);
                 });
         } else {
-            $http.put($rootScope.config.baseUrl + '/tags?token=' + $rootScope.sessionUser.token, $scope.tag)
+            $http.put('/tags?token=' + $rootScope.sessionUser.token, $scope.tag)
                 .success(function() {
                     if ($rootScope.previousPage) {
                         $window.location = '#/tags';
@@ -477,17 +472,24 @@ angular.module('malApp').directive('bookmarkTile', function () {
 
 function bootstrapApp($rootScope, $http) {
 
-    $http.get('/config')
-        .success(function(data) {
+    if ($rootScope.sessionUser) {
+        $http.get('/groups?token=' + $rootScope.sessionUser.token)
+            .success(function(data) {
+                $rootScope.groups = data;
+            });
+    }
 
-            $rootScope.config = data;
-
-            if ($rootScope.sessionUser) {
-                $http.get($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token)
-                    .success(function(data) {
-                        $rootScope.groups = data;
-                    });
-            }
-        });
+    //$http.get('/config')
+    //    .success(function(data) {
+    //
+    //        $rootScope.config = data;
+    //
+    //        if ($rootScope.sessionUser) {
+    //            $http.get($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token)
+    //                .success(function(data) {
+    //                    $rootScope.groups = data;
+    //                });
+    //        }
+    //    });
 
 }

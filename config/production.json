@@ -6,13 +6,5 @@
         "name": "malachite",
         "level": "error",
         "src": true
-    },
-
-    "webOptions": {
-        "baseUrl": "http://192.168.10.100:3003",
-        "mainAppPath": "/",
-        "loginAppPath": "/login.html",
-        "loginRedirectDelay": 7000,
-        "logoutRedirectDelay": 5000
     }
 }

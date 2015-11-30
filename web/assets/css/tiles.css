@@ -51,28 +51,6 @@
     line-height: .768em;
 }
 
-/*
-.tile-link a:hover {
-    color: #2e82bf;
-}
-
-.tile-link a {
-    font-size: 10.6px;
-    letter-spacing: -.2px;
-}
-
-.list-tags a, .nav-utilities a, .trending-actions a::after, .tile-link a {
-    -webkit-transition: all .4s;
-    transition: all .4s;
-}
-
-.tile-link a {
-    font-size: 13px;
-    color: #165888;
-    font-weight: 700;
-}
-*/
-
 .tile-meta {
     font-size: 10px;
     color: gray;

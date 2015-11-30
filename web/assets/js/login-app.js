@@ -22,16 +22,11 @@ loginApp.run(function($rootScope, $http, $cookies, $window) {
 
     $rootScope.pageTitle = 'Bookmarkly - please sign in';
 
-    $http.get('/config')
-        .success(function (data) {
-            $rootScope.config = data;
-
-            // If the visitor is already logged in (has a cookie), take him to the main site.
-            var biscuit = $cookies.getObject('bookmarklyLogin');
-            if (biscuit) {
-                $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
-            }
-        });
+    // If the visitor is already logged in (has a cookie), take him to the main site.
+    var biscuit = $cookies.getObject('bookmarklyLogin');
+    if (biscuit) {
+        $window.location = '/';
+    }
 
 });
 
@@ -39,7 +34,7 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
 
     $scope.login = function() {
 
-        $http.post($rootScope.config.baseUrl + '/authenticate', {'username': $scope.username, 'password': $scope.password})
+        $http.post('/authenticate', {'username': $scope.username, 'password': $scope.password})
             .then(function (serverResponse) {
 
                 //console.log('Response from auth service: ' + JSON.stringify(serverResponse));
@@ -55,7 +50,7 @@ loginApp.controller('LoginController', function($scope, $rootScope, $http, $cook
                 //console.log('Written cookie: ', cookiePayload);
 
                 $cookies.putObject('bookmarklyLogin', cookiePayload, { 'expires': new Date(2100, 1, 1) });
-                $window.location = $rootScope.config.baseUrl + $rootScope.config.mainAppPath;
+                $window.location = '/';
 
             }, function(err) {
                 $('#passwordAlert').show();
