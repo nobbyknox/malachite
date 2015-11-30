@@ -1,4 +1,5 @@
 .idea/
 node_modules
+web/thumbs/
 *.sqlite3
 private.json

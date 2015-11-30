@@ -1,7 +1,7 @@
 <div class="tile-item">
-    <img class="tile-image" src="thumbs/rendermulti-2.png">
+    <img class="tile-image" src="thumbs/{{ bookmark.thumb }}">
 
-    <div class="tile-details">
+    <div class="fluid-container tile-details">
 <!--
         <div class="tile-link"><a href="{{ bookmark.address }}" class="tile-title">{{ bookmark.title }}</a></div>
         <div class="my-action">
@@ -24,9 +24,11 @@
         </div>
 -->
 
-        <div class="col-md-8"><span class="glyphicon glyphicon-star-empty unstarred"></span> <a href="{{ bookmark.address }}" class="tile-title">{{ bookmark.title }}</a></div>
-        <div class="col-md-4 text-right">
-            <a href="#">edit</a>
+        <div class="col-xs-8 col-md-8"><a href="{{ bookmark.address }}" class="tile-title">{{ bookmark.title }}</a></div>
+        <div class="col-xs-4 col-md-4 text-right">
+            <span class="glyphicon" ng-class="{'glyphicon-star':bookmark.starred === 1, 'starred':bookmark.starred === 1,'glyphicon-star-empty': bookmark.starred !== 1, 'unstarred':bookmark.starred !== 1}"></span>
+            <br>
+            <a href="#/bookmarks/{{ bookmark.id }}">edit</a>
             <br>
             <a href="#">share</a>
         </div>
