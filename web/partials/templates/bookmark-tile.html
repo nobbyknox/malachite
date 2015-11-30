@@ -2,27 +2,6 @@
     <img class="tile-image" src="thumbs/{{ bookmark.thumb }}">
 
     <div class="fluid-container tile-details">
-<!--
-        <div class="tile-link"><a href="{{ bookmark.address }}" class="tile-title">{{ bookmark.title }}</a></div>
-        <div class="my-action">
-            <span class="glyphicon glyphicon-star-empty unstarred"></span>
-            <br>
-            <a href="#">edit</a>
-            <a href="#">delete</a>
-            <a href="#">share</a>
-        </div>
--->
-
-<!--
-        <div class="col-sm-8 tile-link"><a href="{{ bookmark.address }}" class="tile-title">{{ bookmark.title }}</a></div>
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-star-empty unstarred"></span>
-            <br>
-            <a href="#">edit</a>
-            <a href="#">delete</a>
-            <a href="#">share</a>
-        </div>
--->
 
         <div class="col-xs-8 col-md-8"><a href="{{ bookmark.address }}" class="tile-title">{{ bookmark.title }}</a></div>
         <div class="col-xs-4 col-md-4 text-right">
@@ -30,7 +9,11 @@
             <br>
             <a href="#/bookmarks/{{ bookmark.id }}">edit</a>
             <br>
-            <a href="#">share</a>
+            share
+        </div>
+
+        <div class="col-xs-12 col-md-12 tile-meta">
+            {{ bookmark.id }} - Created on {{ bookmark.dateCreated }}
         </div>
 
     </div>
