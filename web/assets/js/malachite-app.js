@@ -23,6 +23,10 @@ malApp.config(function($routeProvider) {
             templateUrl: 'partials/logout.html',
             controller: 'LogoutController'
         })
+        .when('/globallogout', {
+            templateUrl: 'partials/global-logout.html',
+            controller: 'GlobalLogoutController'
+        })
         .when('/test', {
             templateUrl: 'partials/test.html',
             controller: 'TestController'
@@ -76,7 +80,7 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
     $rootScope.sessionUser = $cookies.getObject('bookmarklyLogin');
 
     if ($rootScope.sessionUser) {
-        $http.post('/validatetoken', { token: $rootScope.sessionUser.token })
+        $http.post('/validatetoken', {token: $rootScope.sessionUser.token})
             .then(function() {
                 console.log('Welcome back, %s', $rootScope.sessionUser.screenName);
                 bootstrapApp($rootScope, $http);
@@ -117,7 +121,7 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
         $rootScope.feedbackBody = '';
 
         $('#feedbackModal').modal('hide');
-    }
+    };
 
 });
 
@@ -143,6 +147,27 @@ malApp.controller('LogoutController', function($rootScope, $cookies, $window) {
     setTimeout(function() {
         $window.location = '/login.html';
     }, 4000);
+
+});
+
+malApp.controller('GlobalLogoutController', function($rootScope, $cookies, $window, $http) {
+
+    var payload = {
+        'userId': $rootScope.sessionUser.userId
+    };
+
+    $http.post('/globallogout?token=' + $rootScope.sessionUser.token, payload)
+        .then(function() {
+            $cookies.remove('bookmarklyLogin');
+            $rootScope.sessionUser = null;
+            console.log('You have been logged out on all devices');
+
+            setTimeout(function() {
+                $window.location = '/login.html';
+            }, 4000);
+        }, function(response) {
+            console.log(JSON.stringify(response));
+        });
 
 });
 
@@ -459,7 +484,7 @@ malApp.controller('AboutController', function($scope, $rootScope, $http, $window
 // Directives
 // -----------------------------------------------------------------------------
 
-angular.module('malApp').directive('bookmarkTile', function () {
+angular.module('malApp').directive('bookmarkTile', function() {
     return {
         templateUrl: 'partials/templates/bookmark-tile.html'
     };
