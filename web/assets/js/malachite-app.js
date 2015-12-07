@@ -299,8 +299,8 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
         }
     };
 
-    $scope.resetThumbnail = function() {
-        $http.post('/bookmarks/thumbnailreset?token=' + $rootScope.sessionUser.token, { 'id': $scope.bookmark.id })
+    $scope.refreshThumbnail = function() {
+        $http.post('/bookmarks/refreshthumbnail?token=' + $rootScope.sessionUser.token, { 'id': $scope.bookmark.id })
             .then(function(response) {
                 $rootScope.showMessage('Thumbnail Refresh', 'The thumbnail for this bookmark will be refreshed shortly.');
             }, function(response) {
