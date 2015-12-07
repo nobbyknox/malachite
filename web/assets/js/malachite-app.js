@@ -123,6 +123,12 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
         $('#feedbackModal').modal('hide');
     };
 
+    $rootScope.showMessage = function(title, message) {
+        $('#message-modal-label').html(title);
+        $('#message-body').html(message);
+        $('#message-modal').modal('show');
+    };
+
 });
 
 malApp.controller('IndexController', function($rootScope, $window) {
@@ -296,9 +302,9 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
     $scope.resetThumbnail = function() {
         $http.post('/bookmarks/thumbnailreset?token=' + $rootScope.sessionUser.token, { 'id': $scope.bookmark.id })
             .then(function(response) {
-
+                $rootScope.showMessage('Thumbnail Refresh', 'The thumbnail for this bookmark will be refreshed shortly.');
             }, function(response) {
-
+                $rootScope.showMessage('Oops!', JSON.stringify(response.data));
             });
     };
 
