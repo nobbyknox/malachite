@@ -293,6 +293,15 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
         }
     };
 
+    $scope.resetThumbnail = function() {
+        $http.post('/bookmarks/thumbnailreset?token=' + $rootScope.sessionUser.token, { 'id': $scope.bookmark.id })
+            .then(function(response) {
+
+            }, function(response) {
+
+            });
+    };
+
     $scope.save = function() {
 
         var bookmarkWrapper = {
