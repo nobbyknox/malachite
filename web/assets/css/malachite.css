@@ -3,6 +3,19 @@ body {
     background-size: cover;
 }
 
+.container .jumbotron, .container-fluid .jumbotron {
+    border-radius: 20px;
+}
+
+.jumbotron {
+    background-image: linear-gradient(rgb(221, 219, 215), rgba(221, 219, 185, 0.5)), url("../images/antique_books.jpg");
+    height: 533px; /* 75vh; */
+}
+
+.navbar {
+    background: rgba(210, 221, 173, 0.1);
+}
+
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
