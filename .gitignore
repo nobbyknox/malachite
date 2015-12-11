@@ -1,5 +1,6 @@
 .idea/
 node_modules
+web/assets/files/*.xpi
 web/thumbs/
 *.sqlite3
 private.json

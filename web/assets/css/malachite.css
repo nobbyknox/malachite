@@ -4,10 +4,10 @@ body {
 }
 
 .container .jumbotron, .container-fluid .jumbotron {
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
-.jumbotron {
+.landing-page {
     background-image: linear-gradient(rgb(221, 219, 215), rgba(221, 219, 185, 0.5)), url("../images/antique_books.jpg");
     height: 533px; /* 75vh; */
 }
