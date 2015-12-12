@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-xs-12 col-md-12 tile-meta">
-            <span ng-repeat="tag in bookmark.tags" class="border: 1px solid black; color: red;">{{ tag.name }} </span>
+            <span ng-repeat="group in bookmark.groups" class="tile-group">{{ group.name }}</span><span ng-repeat="tag in bookmark.tags" class="tile-tag">{{ tag.name }}</span>
         </div>
 
     </div>

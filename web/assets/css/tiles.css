@@ -56,6 +56,22 @@
     color: gray;
 }
 
+.tile-group {
+    background-color: #d2fad2;
+    border: 1px solid #14821e;
+    color: black;
+    margin-right: 5px;
+    padding: 0 2px;
+}
+
+.tile-tag {
+    background-color: #cdecff;
+    border: 1px solid #272b91;
+    color: black;
+    margin-right: 5px;
+    padding: 0 2px;
+}
+
 /* iPhone 6s Plus */
 @media screen and (max-width: 768px) {
     .tile-item {
