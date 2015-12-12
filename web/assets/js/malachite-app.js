@@ -43,6 +43,10 @@ malApp.config(function($routeProvider) {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksOfGroupController'
         })
+        .when('/bookmarks/tag/:tagId', {
+            templateUrl: 'partials/bookmarks.html',
+            controller: 'BookmarksOfTagController'
+        })
         .when('/groups', {
             templateUrl: 'partials/groups.html',
             controller: 'GroupsController'
@@ -379,6 +383,18 @@ malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $ro
         $window.location = '#/bookmarks/' + id;
     };
 
+});
+
+malApp.controller('BookmarksOfTagController', function($scope, $rootScope, $routeParams, $http, $window) {
+
+    $scope.bookmarks = [];
+    $scope.group = { name: 'test' };
+
+    $http.get('/bookmarks/tag/' + $routeParams.tagId + '?token=' + $rootScope.sessionUser.token)
+        .then(function(data) {
+            console.log(data.data);
+            $scope.bookmarks = data.data;
+        });
 });
 
 malApp.controller('GroupsController', function($scope, $rootScope, $http, $window) {
