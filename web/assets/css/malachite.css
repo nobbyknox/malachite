@@ -1,6 +1,7 @@
 body {
     background: url('../images/wordy-web-main.jpg') no-repeat center center fixed;
     background-size: cover;
+    padding-top: 70px;
 }
 
 .container .jumbotron, .container-fluid .jumbotron {
