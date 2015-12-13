@@ -1,13 +1,6 @@
 <div class="row">
-    <h3 ng-show="group">{{ group.name }}</h3>
+    <h3 ng-show="context">{{ context }}</h3>
     <h3 ng-show="starred">Starred</h3>
 </div>
-
-<!--
-<div class="main-body">
-    <ul class="trendings">
-    </ul>
-</div>
--->
 
 <div bookmark-tile ng-repeat="bookmark in bookmarks"></div>

@@ -39,11 +39,11 @@ malApp.config(function($routeProvider) {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksController'
         })
-        .when('/bookmarks/group/:groupId', {
+        .when('/bookmarks/group/:groupName', {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksOfGroupController'
         })
-        .when('/bookmarks/tag/:tagId', {
+        .when('/bookmarks/tag/:tagName', {
             templateUrl: 'partials/bookmarks.html',
             controller: 'BookmarksOfTagController'
         })
@@ -365,16 +365,12 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
 
 malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $routeParams, $http, $window) {
 
-    $http.get('/bookmarks/group/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
+    $scope.bookmarks = [];
+    $scope.context = $routeParams.groupName;
+
+    $http.get('/bookmarks/group/' + $routeParams.groupName + '?token=' + $rootScope.sessionUser.token)
         .then(function(data) {
             $scope.bookmarks = data.data;
-
-            $http.get('/groups/' + $routeParams.groupId + '?token=' + $rootScope.sessionUser.token)
-                .then(function(response) {
-                    $scope.group = response.data[0] || response.data;
-                }, function(response) {
-                    console.log(JSON.stringify(response));
-                });
         }, function(response) {
             console.log(JSON.stringify(response));
         });
@@ -388,13 +384,17 @@ malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $ro
 malApp.controller('BookmarksOfTagController', function($scope, $rootScope, $routeParams, $http, $window) {
 
     $scope.bookmarks = [];
-    $scope.group = { name: 'test' };
+    $scope.context = $routeParams.tagName;
 
-    $http.get('/bookmarks/tag/' + $routeParams.tagId + '?token=' + $rootScope.sessionUser.token)
+    $http.get('/bookmarks/tag/' + $routeParams.tagName + '?token=' + $rootScope.sessionUser.token)
         .then(function(data) {
             console.log(data.data);
             $scope.bookmarks = data.data;
         });
+
+    $scope.editBookmark = function(id) {
+        $window.location = '#/bookmarks/' + id;
+    };
 });
 
 malApp.controller('GroupsController', function($scope, $rootScope, $http, $window) {
