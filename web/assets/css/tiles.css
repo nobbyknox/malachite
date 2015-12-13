@@ -57,19 +57,39 @@
 }
 
 .tile-group {
-    background-color: #d2fad2;
-    border: 1px solid #14821e;
-    color: black;
+    border: 1px solid lightgrey;
+    display: inline;
     margin-right: 5px;
     padding: 0 2px;
 }
 
+.title-group-link {
+    color: #32cd32;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.title-group-link:hover{
+    color: #228b22;
+    text-decoration: none;
+}
+
 .tile-tag {
-    background-color: #cdecff;
-    border: 1px solid #272b91;
-    color: black;
+    border: 1px solid lightgrey;
+    display: inline;
     margin-right: 5px;
     padding: 0 2px;
+}
+
+.title-tag-link {
+    color: #00bfff;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.title-tag-link:hover{
+    color: #1e90ff;
+    text-decoration: none;
 }
 
 /* iPhone 6s Plus */
