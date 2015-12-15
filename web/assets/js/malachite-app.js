@@ -367,7 +367,16 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
                     console.log(err);
                 });
         }
-    }
+    };
+
+    $scope.delete = function() {
+        $http.delete('/bookmarks/' + $scope.bookmark.id + '?token=' + $rootScope.sessionUser.token)
+            .then(function() {
+                $window.location = $rootScope.previousPage;
+            }, function(data) {
+                $rootScope.showMessage('', data);
+            });
+    };
 
 });
 
