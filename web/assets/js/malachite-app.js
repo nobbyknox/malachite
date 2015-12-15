@@ -412,6 +412,27 @@ malApp.controller('RecentBookmarksController', function($scope, $rootScope, $htt
     $scope.editBookmark = function(id) {
         $window.location = '#/bookmarks/' + id;
     };
+
+    $scope.toggleStar = function(id) {
+        console.log('Toggling star...');
+        $http.post('/bookmarks/togglestar/' + id + '?token=' + $rootScope.sessionUser.token)
+            .then(function(data) {
+                console.log(data);
+
+                $scope.bookmarks.forEach(function(item) {
+                    if (item.id === id) {
+                        if (item.starred === 1) {
+                            item.starred = 0;
+                        } else {
+                            item.starred = 1;
+                        }
+                        console.log('Setting bookmark ID ' + item.id + ' star value to ' + item.starred);
+                    }
+                });
+            }, function(data) {
+                console.log(data);
+            });
+    };
 });
 
 malApp.controller('GroupsController', function($scope, $rootScope, $http, $window) {
