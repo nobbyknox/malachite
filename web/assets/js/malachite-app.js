@@ -207,6 +207,10 @@ malApp.controller('BookmarksController', function($scope, $rootScope, $routePara
         $window.location = '#/bookmarks/' + id;
     };
 
+    $scope.toggleStar = function(id) {
+        _toggleStar(id, $scope.bookmarks, $http, $rootScope);
+    };
+
 });
 
 malApp.controller('BookmarkController', function($scope, $rootScope, $routeParams, $http, $window, $q) {
@@ -383,6 +387,10 @@ malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $ro
         $window.location = '#/bookmarks/' + id;
     };
 
+    $scope.toggleStar = function(id) {
+        _toggleStar(id, $scope.bookmarks, $http, $rootScope);
+    };
+
 });
 
 malApp.controller('BookmarksOfTagController', function($scope, $rootScope, $routeParams, $http, $window) {
@@ -397,6 +405,10 @@ malApp.controller('BookmarksOfTagController', function($scope, $rootScope, $rout
 
     $scope.editBookmark = function(id) {
         $window.location = '#/bookmarks/' + id;
+    };
+
+    $scope.toggleStar = function(id) {
+        _toggleStar(id, $scope.bookmarks, $http, $rootScope);
     };
 });
 
@@ -414,24 +426,7 @@ malApp.controller('RecentBookmarksController', function($scope, $rootScope, $htt
     };
 
     $scope.toggleStar = function(id) {
-        console.log('Toggling star...');
-        $http.post('/bookmarks/togglestar/' + id + '?token=' + $rootScope.sessionUser.token)
-            .then(function(data) {
-                console.log(data);
-
-                $scope.bookmarks.forEach(function(item) {
-                    if (item.id === id) {
-                        if (item.starred === 1) {
-                            item.starred = 0;
-                        } else {
-                            item.starred = 1;
-                        }
-                        console.log('Setting bookmark ID ' + item.id + ' star value to ' + item.starred);
-                    }
-                });
-            }, function(data) {
-                console.log(data);
-            });
+        _toggleStar(id, $scope.bookmarks, $http, $rootScope);
     };
 });
 
@@ -573,17 +568,27 @@ function bootstrapApp($rootScope, $http) {
             });
     }
 
-    //$http.get('/config')
-    //    .success(function(data) {
-    //
-    //        $rootScope.config = data;
-    //
-    //        if ($rootScope.sessionUser) {
-    //            $http.get($rootScope.config.baseUrl + '/groups?token=' + $rootScope.sessionUser.token)
-    //                .success(function(data) {
-    //                    $rootScope.groups = data;
-    //                });
-    //        }
-    //    });
+}
 
+function _toggleStar(id, bookmarks, $http, $rootScope) {
+
+    console.log('Toggling star...');
+
+    $http.post('/bookmarks/togglestar/' + id + '?token=' + $rootScope.sessionUser.token)
+        .then(function(data) {
+            console.log(data);
+
+            bookmarks.forEach(function(item) {
+                if (item.id === id) {
+                    if (item.starred === 1) {
+                        item.starred = 0;
+                    } else {
+                        item.starred = 1;
+                    }
+                    console.log('Setting bookmark ID ' + item.id + ' star value to ' + item.starred);
+                }
+            });
+        }, function(data) {
+            console.log(data);
+        });
 }
