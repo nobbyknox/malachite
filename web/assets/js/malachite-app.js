@@ -373,7 +373,7 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
         }
     };
 
-    $scope.delete = function() {
+    $rootScope.deleteCallback = function() {
         $http.delete('/bookmarks/' + $scope.bookmark.id + '?token=' + $rootScope.sessionUser.token)
             .then(function() {
                 $window.location = $rootScope.previousPage;
