@@ -25,6 +25,7 @@
     -webkit-box-shadow: 0 1px 10px #d9d9d9;
     box-shadow: 0 1px 10px #d9d9d9;
     border-radius: 0 0 5px 5px;
+    overflow-y: scroll;
 }
 
 .trending-actions, .tile-link {
