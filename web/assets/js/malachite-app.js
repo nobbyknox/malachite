@@ -562,12 +562,18 @@ malApp.controller('TagController', function($scope, $rootScope, $routeParams, $h
                     console.log(err);
                 });
         }
-    }
+    };
+
+    $rootScope.deleteCallback = function() {
+        $http.delete('/tags/' + $scope.tag.id + '?token=' + $rootScope.sessionUser.token)
+            .then(function() {
+                $window.location = '#/tags';
+            });
+    };
 
 });
 
-malApp.controller('AboutController', function($scope, $rootScope, $http, $window) {
-});
+malApp.controller('AboutController', function($scope, $rootScope, $http, $window) {});
 
 
 // -----------------------------------------------------------------------------
