@@ -81,7 +81,7 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
 
     $rootScope.pageTitle = 'Bookmarkly';
     $rootScope.searchQuery = '';
-    $rootScope.feedbackSubjects = ['I have a suggestion', 'I found a problem'];
+    $rootScope.feedbackSubjects = ['I have a question', 'I have a suggestion', 'I found a problem'];
     $rootScope.feedbackSubject = $rootScope.feedbackSubjects[0];
     $rootScope.feedbackBody = '';
 
