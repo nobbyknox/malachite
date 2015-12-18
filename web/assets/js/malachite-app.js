@@ -125,6 +125,23 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
         console.log('Subject: ' + $rootScope.feedbackSubject);
         console.log('Body: ' + $rootScope.feedbackBody);
 
+        let feedbackModel = {
+            username: $rootScope.sessionUser.username,
+            screenName: $rootScope.sessionUser.screenName,
+            location: $window.location.href,
+            subject: $rootScope.feedbackSubject,
+            message: $rootScope.feedbackBody
+        };
+
+        $http.post('/feedback?token=' + $rootScope.sessionUser.token, feedbackModel)
+            .success(function() {
+                console.log('Feedback submitted successfully');
+            })
+            .error(function(data) {
+                console.log('Unable to submit feedback: ' + JSON.stringify(data));
+                alert('An error occurred during the posting of your feedback');
+            });
+
         $rootScope.feedbackSubject = $rootScope.feedbackSubjects[0];
         $rootScope.feedbackBody = '';
 

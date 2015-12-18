@@ -9,5 +9,17 @@
         "name": "malachite",
         "level": "error",
         "src": true
+    },
+
+    "email": {
+        "apiKey": "abc",
+        "fromEmail": "feedback@web.com",
+        "fromName": "Bookmarkly",
+        "replyTo": "noreply@web.com"
+    },
+
+    "feedback": {
+        "to": ["admin@web.com"],
+        "subjectPreamble": "Bookmarkly Feedback: "
     }
 }
