@@ -137,6 +137,10 @@ malApp.run(function($rootScope, $http, $location, $window, $cookies) {
         $('#message-modal').modal('show');
     };
 
+    $rootScope.deleteCallback = function() {
+        console.log('Hello (deleted) World!');
+    };
+
 });
 
 malApp.controller('IndexController', function($rootScope, $window) {
@@ -490,7 +494,20 @@ malApp.controller('GroupController', function($scope, $rootScope, $routeParams, 
                     console.log(err);
                 });
         }
-    }
+    };
+
+    $rootScope.deleteCallback = function() {
+        $http.delete('/groups/' + $scope.group.id + '?token=' + $rootScope.sessionUser.token)
+            .then(function(data) {
+
+                $http.get('/groups?token=' + $rootScope.sessionUser.token)
+                    .success(function(data) {
+                        $rootScope.groups = data;
+                    });
+
+                $window.location = '#/groups';
+            });
+    };
 
 });
 

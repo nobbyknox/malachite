@@ -7,7 +7,7 @@
 
     "loggerOptions": {
         "name": "malachite",
-        "level": "trace",
+        "level": "debug",
         "src": true
     }
 }
