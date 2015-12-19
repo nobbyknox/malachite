@@ -236,7 +236,7 @@ malApp.controller('BookmarksController', function($scope, $rootScope, $routePara
 
 malApp.controller('BookmarkController', function($scope, $rootScope, $routeParams, $http, $window, $q) {
 
-    $('#title').focus();
+    $('#address').focus();
 
     $scope.groups = [];
     $scope.tags = [];
