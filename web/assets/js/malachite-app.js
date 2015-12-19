@@ -366,6 +366,7 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
 
         if ($routeParams.id === 'new') {
 
+            bookmarkWrapper.model.id = 0;
             bookmarkWrapper.model.userId = $rootScope.sessionUser.userId;
             bookmarkWrapper.dateCreated = moment().format('YYYY-MM-DD HH:mm:ss');  // TODO: Get format from config
 
@@ -404,7 +405,7 @@ malApp.controller('BookmarkController', function($scope, $rootScope, $routeParam
 malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $routeParams, $http, $window) {
 
     $scope.bookmarks = [];
-    $scope.context = $routeParams.groupName;
+    $scope.messages = $routeParams.groupName;
 
     $http.get('/bookmarks/group/' + $routeParams.groupName + '?token=' + $rootScope.sessionUser.token)
         .then(function(data) {
@@ -426,7 +427,7 @@ malApp.controller('BookmarksOfGroupController', function($scope, $rootScope, $ro
 malApp.controller('BookmarksOfTagController', function($scope, $rootScope, $routeParams, $http, $window) {
 
     $scope.bookmarks = [];
-    $scope.context = $routeParams.tagName;
+    $scope.messages = $routeParams.tagName;
 
     $http.get('/bookmarks/tag/' + $routeParams.tagName + '?token=' + $rootScope.sessionUser.token)
         .then(function(data) {
